@@ -18,7 +18,7 @@ $op		=$_GET[op];  $act	=$_GET[act];
 
 if ($op=='rKantor' AND $act=='input'){
 	$date	= date("Y-m-d");
-	mysql_query("INSERT INTO rkantor(
+	mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO rkantor(
 									id,
 									kantor,
 									alamat,
@@ -39,7 +39,7 @@ if ($op=='rKantor' AND $act=='input'){
 }
 
 elseif ($op=='rKantor' AND $act=='update'){
-  mysql_query("UPDATE rkantor SET 
+  mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE rkantor SET 
 								 kantor	= '$_POST[nKantor]',
 								 alamat	= '$_POST[nAlamat]',
 								 telpon	= '$_POST[nTelp]',
@@ -52,7 +52,7 @@ elseif ($op=='rKantor' AND $act=='update'){
 
 //MENGHAPUS DATA
 elseif ($op=='rKantor' AND $act=='delete'){
-  mysql_query("DELETE from rkantor WHERE id   = '$_GET[id]'");
+  mysqli_query($GLOBALS["___mysqli_ston"], "DELETE from rkantor WHERE id   = '$_GET[id]'");
   header('location:rKantor.php');
 }
 

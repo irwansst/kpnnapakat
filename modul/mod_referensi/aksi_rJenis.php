@@ -18,7 +18,7 @@ $op		=$_GET[op];  $act	=$_GET[act];
 
 if ($op=='rJenis' AND $act=='input'){
 	$date	= date("Y-m-d");
-	mysql_query("INSERT INTO jenis(
+	mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO jenis(
 									kodejenis,
 									urjenis) 
 					                VALUES(
@@ -28,7 +28,7 @@ if ($op=='rJenis' AND $act=='input'){
 	header('location:rJenis.php');
 }
 elseif ($op=='rJenis' AND $act=='update'){
-  mysql_query("UPDATE rarsip SET 
+  mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE rarsip SET 
 								 id	= '$_POST[kodejenis]',
 								 jnsarsip	= '$_POST[urjenis]'
 								 WHERE id   = '$_POST[kodejenis]'");
@@ -37,7 +37,7 @@ elseif ($op=='rJenis' AND $act=='update'){
 
 //MENGHAPUS DATA
 elseif ($op=='rJenis' AND $act=='delete'){
-  mysql_query("DELETE from jenis WHERE id   = '$_POST[id]'");
+  mysqli_query($GLOBALS["___mysqli_ston"], "DELETE from jenis WHERE id   = '$_POST[id]'");
   header('location:rJenis.php');
 }
 

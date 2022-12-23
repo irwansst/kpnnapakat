@@ -29,8 +29,8 @@ echo "
 		</thead>
 		<tbody>";
 		$no=1;
-		$tampil	= mysql_query("SELECT * FROM log where user='$_SESSION[namauser]' AND hour(waktu) > '17:00:00' OR dayofweek(waktu)=1 OR dayofweek(waktu)=7 AND periode='$_SESSION[periode]' ORDER BY  waktu DESC");
-      while ($r=mysql_fetch_array($tampil)){
+		$tampil	= mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM log where user='$_SESSION[namauser]' AND hour(waktu) > '17:00:00' OR dayofweek(waktu)=1 OR dayofweek(waktu)=7 AND periode='$_SESSION[periode]' ORDER BY  waktu DESC");
+      while ($r=mysqli_fetch_array($tampil)){
 	
        echo "<tr class='small text-dark'>
 			<td align='center'>$no</td>			
@@ -71,8 +71,8 @@ echo "
       	<label for='iku'>Pilih IKU:</label>
     		<select class='form-control' id='iku' name='iku' style='width:850px;'>
     			<option value=0 selected>Pilih IKU/ Non IKU</OPTION>";
-				$kueri=mysql_query("SELECT * FROM iku WHERE user='$_SESSION[namauser]' AND periode='$_SESSION[periode]'  ORDER BY iku ASC");
-				while ($k=mysql_fetch_array($kueri)){
+				$kueri=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM iku WHERE user='$_SESSION[namauser]' AND periode='$_SESSION[periode]'  ORDER BY iku ASC");
+				while ($k=mysqli_fetch_array($kueri)){
 				echo "<option value='$k[iku]'>$k[iku]</option>";		
 				}
 			echo "</select>	  		   	
@@ -95,8 +95,8 @@ break;
 //menambah rekaman log
 case "editlog":
 
-	$edit = mysql_query("SELECT * FROM log WHERE id='$_GET[id]'");
-    $r    = mysql_fetch_array($edit);
+	$edit = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM log WHERE id='$_GET[id]'");
+    $r    = mysqli_fetch_array($edit);
     
 	echo "		
 	<div class='card shadow mb-4'>
@@ -124,8 +124,8 @@ case "editlog":
       	<label for='iku'>Pilih IKU:</label>
     		<select class='form-control' id='iku' name='iku' style='width:850px;'>
     			<option value='$r[iku]' selected>$r[iku]</OPTION>";
-				$kueri=mysql_query("SELECT * FROM iku WHERE user='$_SESSION[namauser]'  ORDER BY iku ASC");
-				while ($k=mysql_fetch_array($kueri)){
+				$kueri=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM iku WHERE user='$_SESSION[namauser]'  ORDER BY iku ASC");
+				while ($k=mysqli_fetch_array($kueri)){
 				echo "<option value='$k[iku]'>$k[iku]</option>";		
 				}
 			echo "</select>	  		   	

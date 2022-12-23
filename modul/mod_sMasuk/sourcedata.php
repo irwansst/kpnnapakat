@@ -7,9 +7,9 @@ $term = trim(strip_tags($_GET['term']));
  
 $qstring = "SELECT kantor FROM rKantor WHERE kantor LIKE '".$term."%'";
 //query database untuk mengecek tabel Country 
-$result = mysql_query($qstring);
+$result = mysqli_query($GLOBALS["___mysqli_ston"], $qstring);
  
-while ($row = mysql_fetch_array($result))
+while ($row = mysqli_fetch_array($result))
 {
     $row['value']=htmlentities(stripslashes($row['kantor']));
     //$row['id']=(int)$row['id'];

@@ -45,8 +45,8 @@ echo "
 		</thead>
 		<tbody>";
 		$no=1;
-		$tampil	= mysql_query("SELECT * FROM iku where user='$_SESSION[namauser]' ORDER BY  user DESC");
-      while ($r=mysql_fetch_array($tampil)){
+		$tampil	= mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM iku where user='$_SESSION[namauser]' ORDER BY  user DESC");
+      while ($r=mysqli_fetch_array($tampil)){
 	
        echo "<tr class='small'>
 			<td align='center'>$no</td>			
@@ -114,8 +114,8 @@ echo "
   
 
   case "editiku":
-    $edit = mysql_query("SELECT * FROM riku WHERE id='$_GET[id]'");
-    $r    = mysql_fetch_array($edit);
+    $edit = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM riku WHERE id='$_GET[id]'");
+    $r    = mysqli_fetch_array($edit);
 	
 	
 	echo "<h1>Ubah iku</h1>
@@ -130,8 +130,8 @@ echo "
 			//dropdown disposisi iku
 			echo "<select name='iku' style='width: 515px;'>
 					<option value='$r[iku]' selected>$r[iku]</OPTION>";
-					$kueri=mysql_query("SELECT * FROM iku WHERE user='$_SESSION[namauser]' AND periode='$_SESSION[periode]' ORDER BY iku ASC");
-					while ($k=mysql_fetch_array($kueri)){
+					$kueri=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM iku WHERE user='$_SESSION[namauser]' AND periode='$_SESSION[periode]' ORDER BY iku ASC");
+					while ($k=mysqli_fetch_array($kueri)){
 					echo "<option value='$k[iku]'>$k[iku]</option>";		
 					}
 			echo "</select></label>

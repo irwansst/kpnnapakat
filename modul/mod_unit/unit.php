@@ -15,7 +15,7 @@ if ($_SESSION['leveluser']=='admin'){
 	
 			<div class='card-body'>
 				<div class='row'>	
-					<a href='?op=unit&act=tambahunit' class='btn btn-primary btn-icon-split'>
+					<a href='?op=home' class='btn btn-primary btn-icon-split'>
           				<span class='icon text-white-50'><i class='fas fa-plus'></i></span>
 						<span class='text'>Tambah</span>	
       				</a>  
@@ -36,8 +36,8 @@ if ($_SESSION['leveluser']=='admin'){
 					
 					<tbody>";
 					$no=1;
-					$tampil	= mysql_query("SELECT * FROM kpn_unit ORDER BY kode ASC ");
-      while ($r=mysql_fetch_array($tampil)){
+					$tampil	= mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM kpn_unit ORDER BY kode ASC ");
+      while ($r=mysqli_fetch_array($tampil)){
 	
 		echo "<tr class='small text-dark'>
 			<td align='center'>$no</td>			
@@ -98,8 +98,8 @@ break;
 //mengubah data unit
 case "editunit":
 
-	$edit = mysql_query("SELECT * FROM kpn_unit WHERE id='$_GET[id]'");
-    $r    = mysql_fetch_array($edit);
+	$edit = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM kpn_unit WHERE id='$_GET[id]'");
+    $r    = mysqli_fetch_array($edit);
     
 	echo "		
 	<div class='card shadow mb-4'>

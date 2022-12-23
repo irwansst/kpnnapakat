@@ -22,8 +22,8 @@ else{
 		$date	= date("Y-m-d");
 						
 			//membuat nomor urut arsip
-			$q = mysql_query("select MAX(nUrut) as nourut from sarsip where periode='$_SESSION[periode]' AND bidang='$_POST[bidang]' ");
-			$r = mysql_fetch_array($q);
+			$q = mysqli_query($GLOBALS["___mysqli_ston"], "select MAX(nUrut) as nourut from sarsip where periode='$_SESSION[periode]' AND bidang='$_POST[bidang]' ");
+			$r = mysqli_fetch_array($q);
 			if($r){
 					$nurut=$r[nourut]+1;
 			}else{
@@ -33,7 +33,7 @@ else{
 			//membuat nomor arsip
 			$noarc = $_SESSION[periode].$_POST[bidang].sprintf("%05d", $nurut);
 			//memasukkan data ke tabel
-			mysql_query("INSERT INTO sarsip(
+			mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO sarsip(
 									tArsip,
 									jKlasifikasi,
 									jArsip,
@@ -66,7 +66,7 @@ else{
 									'$_SESSION[periode]',
 									'$nurut')");
 		//menambahkan nomor arsip ke surat masuk									
-		mysql_query("UPDATE skeluar SET nArsip = '$noarc' WHERE id_sKeluar='$_POST[id]'");
+		mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE skeluar SET nArsip = '$noarc' WHERE id_sKeluar='$_POST[id]'");
 		
 			//=========================================
 			//akhir dari query mysql

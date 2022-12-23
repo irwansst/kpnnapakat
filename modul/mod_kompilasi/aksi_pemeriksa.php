@@ -13,11 +13,11 @@ $op=$_GET[op];
 $act=$_GET[act];
 
 if ($op=='pemeriksa' AND $act=='hapus'){
-  mysql_query("DELETE FROM pemeriksa WHERE id_pemeriksa='$_GET[id]'");
+  mysqli_query($GLOBALS["___mysqli_ston"], "DELETE FROM pemeriksa WHERE id_pemeriksa='$_GET[id]'");
   header('location:pemeriksa.php');
 }
 elseif ($op=='pemeriksa' AND $act=='input'){
-  mysql_query("INSERT INTO pemeriksa(
+  mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO pemeriksa(
 				tgl,
 				sumber,
 				terlapor,
@@ -49,7 +49,7 @@ elseif ($op=='pemeriksa' AND $act=='input'){
   header('location:pemeriksa.php');
 }
 elseif ($op=='pemeriksa' AND $act=='update'){
-  mysql_query("UPDATE pemeriksa SET 
+  mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE pemeriksa SET 
 				tgl = '$_POST[tgl]',
 				sumber = '$_POST[sumber]',
 				terlapor = '$_POST[terlapor]',

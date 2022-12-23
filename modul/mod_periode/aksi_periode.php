@@ -15,7 +15,7 @@ if ($op=='periode' AND $act=='update'){
 $periode = $_POST['periode'];
 $_SESSION[periode]   = $periode;
 
-header('location:../../show.php?op='.$op);
+header('location:../../show.php?op=home');
 }
 }
 ?>

@@ -38,9 +38,9 @@ switch($_GET[act]){
 		<tbody>";
 		
 	$no=1;
-	$tampil	= mysql_query("SELECT id,laporan,dasar,tgl_mulai,tgl_akhir,(SELECT urbidang FROM rjabatan WHERE kode LIKE CONCAT(LEFT(bidang,4),'00')) AS bidang, (SELECT urbidang FROM rjabatan WHERE kode=bidang) AS uic,output,tgl_output FROM pelaporan WHERE periode LIKE '$_SESSION[periode]' ORDER BY tgl_akhir ASC ");
+	$tampil	= mysqli_query($GLOBALS["___mysqli_ston"], "SELECT id,laporan,dasar,tgl_mulai,tgl_akhir,(SELECT urbidang FROM rjabatan WHERE kode LIKE CONCAT(LEFT(bidang,4),'00')) AS bidang, (SELECT urbidang FROM rjabatan WHERE kode=bidang) AS uic,output,tgl_output FROM pelaporan WHERE periode LIKE '$_SESSION[periode]' ORDER BY tgl_akhir ASC ");
 
-     while ($r=mysql_fetch_array($tampil)){
+     while ($r=mysqli_fetch_array($tampil)){
 	       echo "<tr>
 			 <td align=center>$no</td>
 			 <td align=left>$r[laporan]</td>
@@ -107,8 +107,8 @@ switch($_GET[act]){
 			echo "	<label><span>UIC</span>";
 		    echo  "<select name='vbidang'>
             <option value=0 selected>- UIC -</option>";
-            $tampil=mysql_query("SELECT * FROM rjabatan WHERE right(kode,2) NOT LIKE '00%' ORDER BY id ASC");
-            while($t=mysql_fetch_array($tampil)){
+            $tampil=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rjabatan WHERE right(kode,2) NOT LIKE '00%' ORDER BY id ASC");
+            while($t=mysqli_fetch_array($tampil)){
             echo "<option value='$t[kode]'>$t[kode] | $t[urbidang]</option>";
             }
 			echo "</select></label>
@@ -122,8 +122,8 @@ switch($_GET[act]){
   
 
   case "editpelaporan":
-    $edit = mysql_query("SELECT * FROM pelaporan WHERE id='$_GET[id]'");
-    $r    = mysql_fetch_array($edit);
+    $edit = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM pelaporan WHERE id='$_GET[id]'");
+    $r    = mysqli_fetch_array($edit);
 	
 	
 	echo "<h1>Ubah Pelaporan</h1>
@@ -143,8 +143,8 @@ switch($_GET[act]){
     break;
 
     case "outputpelaporan":
-    $out = mysql_query("SELECT * FROM pelaporan WHERE id ='$_GET[id]'");
-    $r    = mysql_fetch_array($out);
+    $out = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM pelaporan WHERE id ='$_GET[id]'");
+    $r    = mysqli_fetch_array($out);
 	
 	echo "<h1>Rekam Output</h1>
 			<div class='line'></div>
@@ -160,8 +160,8 @@ switch($_GET[act]){
     break;
 	
 	case "lihatpelaporan":
-    $edit = mysql_query("SELECT id,laporan,dasar,tgl_mulai,tgl_akhir,(SELECT urbidang FROM rjabatan WHERE kode LIKE CONCAT(LEFT(bidang,4),'00')) AS bidang, (SELECT urbidang FROM rjabatan WHERE kode=bidang) AS uic,output,tgl_output,stamp,periode FROM pelaporan WHERE periode LIKE '$_SESSION[periode]'AND id='$_GET[id]'");
-    $r    = mysql_fetch_array($edit);
+    $edit = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT id,laporan,dasar,tgl_mulai,tgl_akhir,(SELECT urbidang FROM rjabatan WHERE kode LIKE CONCAT(LEFT(bidang,4),'00')) AS bidang, (SELECT urbidang FROM rjabatan WHERE kode=bidang) AS uic,output,tgl_output,stamp,periode FROM pelaporan WHERE periode LIKE '$_SESSION[periode]'AND id='$_GET[id]'");
+    $r    = mysqli_fetch_array($edit);
 	
 	
 	echo "<h1>Detail Informasi</h1>
@@ -207,9 +207,9 @@ case "lihatpelaporanontrack":
 		<tbody>";
 		
 	$no=1;
-	$tampil	= mysql_query("SELECT id,laporan,dasar,tgl_mulai,tgl_akhir,(SELECT urbidang FROM rjabatan WHERE kode LIKE CONCAT(LEFT(bidang,4),'00')) AS bidang, (SELECT urbidang FROM rjabatan WHERE kode=bidang) AS uic,output FROM pelaporan WHERE periode LIKE '$_SESSION[periode]' AND datediff(now(),tgl_akhir) < -3 AND output IS NULL  ORDER BY tgl_akhir ASC ");
+	$tampil	= mysqli_query($GLOBALS["___mysqli_ston"], "SELECT id,laporan,dasar,tgl_mulai,tgl_akhir,(SELECT urbidang FROM rjabatan WHERE kode LIKE CONCAT(LEFT(bidang,4),'00')) AS bidang, (SELECT urbidang FROM rjabatan WHERE kode=bidang) AS uic,output FROM pelaporan WHERE periode LIKE '$_SESSION[periode]' AND datediff(now(),tgl_akhir) < -3 AND output IS NULL  ORDER BY tgl_akhir ASC ");
 
-     while ($r=mysql_fetch_array($tampil)){
+     while ($r=mysqli_fetch_array($tampil)){
 	       echo "<tr>
 			 <td align=center>$no</td>
 			 <td align=left>$r[laporan]</td>
@@ -279,9 +279,9 @@ case "lihatpelaporanontrack":
 		<tbody>";
 		
 	$no=1;
-	$tampil	= mysql_query("SELECT id,laporan,dasar,tgl_mulai,tgl_akhir,(SELECT urbidang FROM rjabatan WHERE kode LIKE CONCAT(LEFT(bidang,4),'00')) AS bidang, (SELECT urbidang FROM rjabatan WHERE kode=bidang) AS uic,output FROM pelaporan WHERE periode LIKE '$_SESSION[periode]' AND DATEDIFF(NOW(),tgl_akhir) >= -3 AND  DATEDIFF(NOW(),tgl_akhir) < 1 AND output IS NULL  ORDER BY tgl_akhir ASC ");
+	$tampil	= mysqli_query($GLOBALS["___mysqli_ston"], "SELECT id,laporan,dasar,tgl_mulai,tgl_akhir,(SELECT urbidang FROM rjabatan WHERE kode LIKE CONCAT(LEFT(bidang,4),'00')) AS bidang, (SELECT urbidang FROM rjabatan WHERE kode=bidang) AS uic,output FROM pelaporan WHERE periode LIKE '$_SESSION[periode]' AND DATEDIFF(NOW(),tgl_akhir) >= -3 AND  DATEDIFF(NOW(),tgl_akhir) < 1 AND output IS NULL  ORDER BY tgl_akhir ASC ");
 
-     while ($r=mysql_fetch_array($tampil)){
+     while ($r=mysqli_fetch_array($tampil)){
 	       echo "<tr>
 			 <td align=center>$no</td>
 			 <td align=left>$r[laporan]</td>
@@ -351,9 +351,9 @@ case "lihatpelaporanontrack":
 		<tbody>";
 		
 	$no=1;
-	$tampil	= mysql_query("SELECT id,laporan,dasar,tgl_mulai,tgl_akhir,(SELECT urbidang FROM rjabatan WHERE kode LIKE CONCAT(LEFT(bidang,4),'00')) AS bidang, (SELECT urbidang FROM rjabatan WHERE kode=bidang) AS uic,output FROM pelaporan WHERE periode LIKE '$_SESSION[periode]' AND datediff(now(),tgl_akhir) > 1 AND output IS NULL  ORDER BY tgl_akhir ASC ");
+	$tampil	= mysqli_query($GLOBALS["___mysqli_ston"], "SELECT id,laporan,dasar,tgl_mulai,tgl_akhir,(SELECT urbidang FROM rjabatan WHERE kode LIKE CONCAT(LEFT(bidang,4),'00')) AS bidang, (SELECT urbidang FROM rjabatan WHERE kode=bidang) AS uic,output FROM pelaporan WHERE periode LIKE '$_SESSION[periode]' AND datediff(now(),tgl_akhir) > 1 AND output IS NULL  ORDER BY tgl_akhir ASC ");
 
-     while ($r=mysql_fetch_array($tampil)){
+     while ($r=mysqli_fetch_array($tampil)){
 	       echo "<tr>
 			 <td align=center>$no</td>
 			 <td align=left>$r[laporan]</td>
@@ -425,9 +425,9 @@ case "lihatpelaporanontrack":
 		<tbody>";
 		
 	$no=1;
-	$tampil	= mysql_query("SELECT id,laporan,dasar,tgl_mulai,tgl_akhir,(SELECT urbidang FROM rjabatan WHERE kode LIKE CONCAT(LEFT(bidang,4),'00')) AS bidang, (SELECT urbidang FROM rjabatan WHERE kode=bidang) AS uic,output FROM pelaporan WHERE periode LIKE '$_SESSION[periode]' AND output is NOT NULL  ORDER BY tgl_akhir ASC ");
+	$tampil	= mysqli_query($GLOBALS["___mysqli_ston"], "SELECT id,laporan,dasar,tgl_mulai,tgl_akhir,(SELECT urbidang FROM rjabatan WHERE kode LIKE CONCAT(LEFT(bidang,4),'00')) AS bidang, (SELECT urbidang FROM rjabatan WHERE kode=bidang) AS uic,output FROM pelaporan WHERE periode LIKE '$_SESSION[periode]' AND output is NOT NULL  ORDER BY tgl_akhir ASC ");
 
-     while ($r=mysql_fetch_array($tampil)){
+     while ($r=mysqli_fetch_array($tampil)){
 	       echo "<tr>
 			 <td align=center>$no</td>
 			 <td align=left>$r[laporan]</td>
@@ -493,8 +493,8 @@ case "lihatpelaporanontrack":
 			echo "	<label><span>KLASIFIKASI ARSIP</span>";
 		    echo  "<select name='jklasifikasi' style='width:450px'>
             <option value=0 selected>- KLASIFIKASI -</option>";
-            $tampil=mysql_query("SELECT * FROM rklasifikasi ORDER BY kode ASC");
-            while($t=mysql_fetch_array($tampil)){
+            $tampil=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rklasifikasi ORDER BY kode ASC");
+            while($t=mysqli_fetch_array($tampil)){
             echo "<option value='$t[kode]'>$t[kode]&emsp;&emsp;|&emsp;$t[jenis]</option>";
             }
 			echo "</select></label>";
@@ -503,8 +503,8 @@ case "lihatpelaporanontrack":
 			echo "	<label><span>JENIS ARSIP</span>";
 		    echo  "<select name='jarsip' style='width:155px'>
             <option value=0 selected>- JENIS -</option>";
-            $metu=mysql_query("SELECT * FROM rarsip ORDER BY jnsarsip ASC");
-            while($m=mysql_fetch_array($metu)){
+            $metu=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rarsip ORDER BY jnsarsip ASC");
+            while($m=mysqli_fetch_array($metu)){
             echo "<option value='$m[jnsarsip]'>$m[jnsarsip]</option>";
             }
 			echo "</select></label>
@@ -515,8 +515,8 @@ case "lihatpelaporanontrack":
 			echo "	<label><span>BAGIAN/BIDANG</span>";
 		    echo  "<select name='bidang' style='width:450px'>
             <option value=0 selected>- BAGIAN/BIDANG -</option>";
-            $metu=mysql_query("SELECT * FROM rjabatan where right(kode,2)='00' ");
-            while($m=mysql_fetch_array($metu)){
+            $metu=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rjabatan where right(kode,2)='00' ");
+            while($m=mysqli_fetch_array($metu)){
             echo "<option value='$m[kode]'>$m[kode]&emsp;|&emsp;$m[urbidang]</option>";
             }
 			echo "</select></label>";
@@ -578,10 +578,10 @@ case "lihatpelaporanontrack":
 			echo "</select></label>";		
 			
 	//QUERY UNTUK MENGISI KETERANGAN PADA TEXTAREA	
-	$show	= mysql_query("SELECT * FROM pelaporan WHERE  id='$_GET[id]'");
+	$show	= mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM pelaporan WHERE  id='$_GET[id]'");
 		
     
-	if ($s=mysql_fetch_array($show)){
+	if ($s=mysqli_fetch_array($show)){
 		echo "<label ><span >BERKAS FILE</span><input type='text' name='nmFile' value='$s[nfile]'></label>";
 		echo "<label><span>KETERANGAN</span><textarea align='left' name='ket' style='width:450px' rows='7'>Surat Masuk \nTanggal Agenda: $s[tMasuk] \nNomor Agenda: $s[nAgenda] \nNomor Surat: $s[nSurat] \nTanggal Surat: $s[tSurat] \nPerihal Surat: $s[hal]</textarea></label>";
 		}else{

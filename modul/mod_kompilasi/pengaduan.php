@@ -33,8 +33,8 @@ switch($_GET[act]){
 		</thead>
 		<tbody>";
     $no=1;
-    $tampil	= mysql_query("SELECT * from pengaduan WHERE  periode='$_SESSION[periode]' ORDER BY tgl desc");
-    while ($r=mysql_fetch_array($tampil)){
+    $tampil	= mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * from pengaduan WHERE  periode='$_SESSION[periode]' ORDER BY tgl desc");
+    while ($r=mysqli_fetch_array($tampil)){
        echo "<tr>
              <td>$r[1]</td>
 		     <td>$r[2]</td>
@@ -82,8 +82,8 @@ switch($_GET[act]){
      break;
   
   case "editpengaduan":
-    $edit=mysql_query("SELECT * FROM pengaduan WHERE id_pengaduan='$_GET[id]'");
-    $r=mysql_fetch_array($edit);
+    $edit=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM pengaduan WHERE id_pengaduan='$_GET[id]'");
+    $r=mysqli_fetch_array($edit);
 
     echo "<h1>Edit pengaduan</h1>
 			<div class='line'></div>

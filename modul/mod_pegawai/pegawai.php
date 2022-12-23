@@ -25,9 +25,9 @@ switch($_GET[act]){
 			</tr>
 		</thead>
 		<tbody>";
-	$tampil=mysql_query("SELECT * FROM pegawai ORDER BY nama ASC");
+	$tampil=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM pegawai ORDER BY nama ASC");
     $no=1;
-    while ($r=mysql_fetch_array($tampil)){
+    while ($r=mysqli_fetch_array($tampil)){
        echo "<tr>
 			 <td  align=center>$no</td>
              <td>$r[nama]<br>NIP : $r[nip]<br>NRP : $r[nrp]</td>
@@ -60,8 +60,8 @@ switch($_GET[act]){
      break;
   
   case "editpegawai":
-    $edit=mysql_query("SELECT * FROM pegawai WHERE id_pegawai='$_GET[id]'");
-    $r=mysql_fetch_array($edit);
+    $edit=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM pegawai WHERE id_pegawai='$_GET[id]'");
+    $r=mysqli_fetch_array($edit);
 
     echo "<h1>Edit Pegawai</h1>
 			<div class='line'></div>

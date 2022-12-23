@@ -18,7 +18,7 @@ $op		=$_GET[op];  $act	=$_GET[act];
 
 if ($op=='log' AND $act=='input'){
 	$date	= date("Y-m-d");
-	mysql_query("INSERT INTO log(
+	mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO log(
 									id,
 									user,
 									kegiatan,
@@ -36,7 +36,7 @@ if ($op=='log' AND $act=='input'){
 	header('location:../../show.php?op='.$op);
 }
 elseif ($op=='log' AND $act=='update'){
-  mysql_query("UPDATE log SET 
+  mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE log SET 
 								 waktu		= '$_POST[waktu]',
 								 kegiatan	= '$_POST[kegiatan]',
 								 iku			= '$_POST[iku]',
@@ -47,7 +47,7 @@ elseif ($op=='log' AND $act=='update'){
 
 // MENGHAPUS DATA
 elseif ($op=='log' AND $act=='delete'){
-  mysql_query("DELETE FROM log WHERE id='$_GET[id]' ");
+  mysqli_query($GLOBALS["___mysqli_ston"], "DELETE FROM log WHERE id='$_GET[id]' ");
 	header('location:../../show.php?op='.$op);
 }
 //

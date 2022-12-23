@@ -18,7 +18,7 @@ $op		=$_GET[op];  $act	=$_GET[act];
 
 if ($op=='pelaporan' AND $act=='input'){
 	$date	= date("Y-m-d");
-	mysql_query("INSERT INTO pelaporan(
+	mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO pelaporan(
 									laporan,
 									dasar,
 									tgl_mulai,
@@ -36,7 +36,7 @@ if ($op=='pelaporan' AND $act=='input'){
 	header('location:../../show.php?op='.$op);
 }
 elseif ($op=='pelaporan' AND $act=='update'){
-  mysql_query("UPDATE pelaporan SET 
+  mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE pelaporan SET 
 								 laporan	= '$_POST[vlaporan]',
 								 dasar 		= '$_POST[vdasar]',
 								 tgl_mulai	= '$_POST[vmulai]',
@@ -46,7 +46,7 @@ elseif ($op=='pelaporan' AND $act=='update'){
 }
 
 elseif ($op=='pelaporan' AND $act=='output'){
-  mysql_query("UPDATE pelaporan SET 
+  mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE pelaporan SET 
 								 output	= '$_POST[voutput]',
 								 tgl_output = '$_POST[vtgloutput]'					 				 
 								 WHERE id   = '$_POST[id]'");
@@ -64,7 +64,7 @@ elseif ($op=='pelaporan' AND $act=='upload'){
 				if(move_uploaded_file($img_loc,$folder.$img))
 				{
 					echo "<script>alert('Upload Data Sukses!!!');</script>";
-					mysql_query("UPDATE pelaporan SET nfile = '$nmfile' WHERE id_pelaporan='$_POST[id]'");
+					mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE pelaporan SET nfile = '$nmfile' WHERE id_pelaporan='$_POST[id]'");
   					header('location:../../show.php?op='.$op);
 				}else{
 					echo "<script>alert('Upload Gagal');</script>";

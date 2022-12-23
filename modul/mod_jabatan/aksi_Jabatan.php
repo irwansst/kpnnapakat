@@ -18,7 +18,7 @@ $op		=$_GET[op];  $act	=$_GET[act];
 
 if ($op=='Jabatan' AND $act=='input'){
 	$date	= date("Y-m-d");
-	mysql_query("INSERT INTO rjabatan(
+	mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO rjabatan(
 									id,
 									kode,
 									urbidang,
@@ -36,7 +36,7 @@ if ($op=='Jabatan' AND $act=='input'){
 	header('location:../../show.php?op='.$op);
 }
 elseif ($op=='Jabatan' AND $act=='update'){
-  mysql_query("UPDATE rjabatan SET 
+  mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE rjabatan SET 
 								 kode		= '$_POST[nKode]',
 								 urbidang	= '$_POST[urBidang]',
 								 jabatan	= '$_POST[urJabatan]',
@@ -48,7 +48,7 @@ elseif ($op=='Jabatan' AND $act=='update'){
 
 //MENGHAPUS DATA
 elseif ($op=='Jabatan' AND $act=='delete'){
-  mysql_query("DELETE from rjabatan WHERE id   = '$_GET[id]'");
+  mysqli_query($GLOBALS["___mysqli_ston"], "DELETE from rjabatan WHERE id   = '$_GET[id]'");
   header('location:../../show.php?op='.$op);
 }
 

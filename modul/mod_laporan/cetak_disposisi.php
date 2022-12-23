@@ -18,100 +18,58 @@ include "../../config/koneksi.php";
 
 ob_start();
 
-$nama 	= mysql_query("SELECT * from nama WHERE id_nama=1 ");
-$tnama	= mysql_fetch_array($nama);
+/*
+$nama 	= mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * from nama WHERE id_nama=1 ");
+$tnama	= mysqli_fetch_array($nama);
 
-$kue	= mysql_query("Select * from smasuk a left join jenis b on a.jSurat=b.kodejenis where id_sMasuk=$_GET[id]");
-$h		= mysql_fetch_array($kue);
+$kue	= mysqli_query($GLOBALS["___mysqli_ston"], "Select * from smasuk a left join jenis b on a.jSurat=b.kodejenis where id_sMasuk=$_GET[id]");
+$h		= mysqli_fetch_array($kue);
 
-$jab3	= mysql_query("select jabatan from rjabatan where left(eselon,1)='3' ");
-$jab4	= mysql_query("select jabatan from rjabatan where left(eselon,1)='4' ");
+$jab3	= mysqli_query($GLOBALS["___mysqli_ston"], "select jabatan from rjabatan where left(eselon,1)='3' ");
+$jab4	= mysqli_query($GLOBALS["___mysqli_ston"], "select jabatan from rjabatan where left(eselon,1)='4' ");
+*/
 
-echo '	
+echo '
 	<html>
 	<head><title></title>
 		<style type="text/css">
 	p{
 		text-align:left;
 		font-size:7px;
-		font-family:"Times New Roman", Times, serif;
+		font-family:"Arial, Helvetica, sans-serif;
 		color:#000066;
 	}
 	body{
 		font-size:12px;
-		font-family:"Times New Roman", Times, serif;	
+		font-family:"Arial, Helvetica, sans-serif;
 	}
-	
+
 	table{
 		border-style:solid;
 		border-width:thin;
 		border-spacing:inherit;
 	}
-	
 
-		
+
+
 	</style>
-	
+
 	</head>
 	<body>
 	<table width="100%" cellspacing="0">
 	<tr><td rowspan="6" width="15%" align=center><img src="../../images/logo-keu.jpg" width="75px" height="60px" ></img></td>
-	<td align=center width="85%" style="font-size:16px;">'.$tnama[kementerian].'</td></tr>
-	<tr><td align=center style="font-size:14px;">'.$tnama[eselon1].'</td></tr>
-	<tr><td align=center style="font-size:14px;">'.$tnama[eselon2].'</td></tr>
-	<tr><td align=center style="font-size:12px;">'.$tnama[eselon3].'</td></tr>
-	<tr><td align=center style="font-size:9px;">'.$tnama[alamat].' </td></tr>
-	<tr><td align=center style="font-size:9px;"> Telpon:'.$tnama[telp].' Email: '.$tnama[email].' Website:'.$tnama[web].'</td></tr>
+	<td align=center width="85%" style="font-size:16px;">Kementerian</td></tr>
+	<tr><td align=center style="font-size:14px;">Eselon I</td></tr>
+	<tr><td align=center style="font-size:14px;">Eselon 2</td></tr>
+	<tr><td align=center style="font-size:12px;">Eselon III</td></tr>
+	<tr><td align=center style="font-size:9px;">Eselon IV </td></tr>
+	<tr><td align=center style="font-size:9px;"> Telpon:telp Email: mail Website:web</td></tr>
 	</table>
 
 	<table width="100%" cellspacing="0">
-	<tr><td align=center bgcolor=black style="font-weight:bold; color:#ffffff; font-size:12px;">LEMBAR DISPOSISI '.$tnama[nama].'</td></tr>
-	</table>	
-	
-	<table width="100%" cellspacing="0" cellpadding="7">
-	<tr><td wdith="33%" style="border-width:thin; border-right-style:solid;" >Nomor Naskah Dinas :<br/><b>'.$h[nSurat].'</b> 
-	<br/>Tanggal Naskah Dinas : '.$h[tSurat].' 
-	<br/>Lampiran : '.$h[jLampiran].'
-	</td><td width="34%" valign=top >Status: '.$h[status].' <br/>Sifat: '.$h[uSifat].'<br/>Jenis:  '.$h[jSurat].' ('.$h[urjenis].')</td>
-	<td width="33%" style="border-width:thin; border-left-style:solid;" valign=top>Diterima Tanggal: '.$h[tMasuk].' <br/>
-	Nomor Agenda : <b>'.$h[nAgenda].'</b><br/><br/>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img alt="barcode" src="barcode.php?text=*'.$h[nAgenda].'*&print=false" />
-	</td></tr>
-	</table>
-	
-	<table width="100%" cellspacing="0" cellpadding="7">
-	<tr><td><font size="10pt">Dari : '.$h[dari].' <br/>Hal : '.$h[hal].' </font></td></tr>
-	</table>
-	
-	<table width="100%" cellspacing="0" cellpadding="7">';
-	
-	$sifat = trim($h[uSifat]);
-	if($sifat == 'Segera'){
-	echo '
-	<tr><td width="50%" align="center" style="border-width:thin; border-right-style:solid;"><input type="checkbox" name="usifat" value="Segera" checked="true">SEGERA</td>
-	<td width="50%" align="center" style="border-width:thin; border-left-style:solid;"><input type="checkbox" name="usifat" value="Sangat Segera"   >SANGAT SEGERA</td></tr> ';
-	}else{
-	echo '
-	<tr><td width="50%" align="center" style="border-width:thin; border-right-style:solid;"><input type="checkbox" name="usifat" value="Segera" >SEGERA</td>
-	<td width="50%" align="center" style="border-width:thin; border-left-style:solid;"><input type="checkbox" name="usifat" value="Sangat Segera"  checked="true">SANGAT SEGERA</td></tr>';
-	};
-	
-echo '	
-	</table>
-	
-	<table width="100%" cellspacing="0" cellpadding="7">
-	<tr><td style="border-style:solid";><font size="10pt">[  ] Disajikan Untuk Yth : [  ] Kepala Kantor </font></td></tr>
-	</table>
+	<tr><td align=center bgcolor=black style="font-weight:bold; color:#ffffff; font-size:12px;">LEMBAR DISPOSISI nama</td></tr>
+	</table>';
 
-	<table width="100%" cellspacing="0" cellpadding="7">
-	<tr style="font-size:10pt;">
-	<td valign=top>
-	<br/>
-	<b><u>DISPOSISI KEPADA:</u></b><br/>';
-	while($j3 = mysql_fetch_array($jab3)){
-		echo '[     ] '.$j3[jabatan];
-		echo '<br />';
-		};
 
 echo '
 	<br/>
@@ -133,14 +91,9 @@ echo '
 	<b><u>CATATAN:</u></b>
 	</td>
 	<td valign=top>
-	<br/>
-	<b><u>PEJABAT ESELON IV:</u></b><br/>';
-		while($j4 = mysql_fetch_array($jab4)){
-		echo '[     ] '.$j4[jabatan];
-		echo '<br />';
-		};
-	
-echo '	
+	<br/>';
+
+echo '
 	<br/>
 	<b>[  ] PEJABAT/UNIT LAIN</b>
 	</td>
@@ -180,17 +133,17 @@ echo '
 	<br/>
 	</td>
 	</tr>
-	</table>	
-	
+	</table>
+
 	<table width="100%" cellspacing="0" cellpadding="7">
 	<tr><td width="50%" align=left style="border-width:thin; border-right-style:solid; border-bottom-style:solid;"><font size="10pt">Tgl dikirim untuk proses: <br/>Diterima Oleh:<br/><br/><br/><br/><br/><br/></font></td>
 	<td width="50%" align=left style="border-width:thin; border-bottom-style:solid;"><font size="10pt">Diajukan kembali tanggal: <br/>Diterima Oleh:<br/><br/><br/></font><br/><br/><br/></td></tr>
 	<tr><td width="50%" align=left style="border-width:thin; border-right-style:solid; ">Tgl kembali untuk proses: <br/>Diterima Oleh:<br/><br/><br/><br/><br/><br/></font></td>
 	<td width="50%" align=left style="border-width:thin; "><font size="10pt">Tanggal selesai dari KK:<br/><br/><br/><br/><br/><br/></font></td></tr>
-	</table>	
+	</table>
 	<font size="8pt" color="grey"><p>NB: Format Disposisi sesuai dengan PMK-181/PMK.01/2014 tentang Tata Naskah Dinas di Kementerian Keuangan</p></font>
 	</body></html>';
-	
+
 $html	= ob_get_contents();
 ob_end_clean();
 $mpdf = new mPDF('utf-8','A4');
@@ -198,6 +151,5 @@ $mpdf->setFooter('Generated by: Aplikasi SPARTAN||');
 $mpdf->WriteHTML(utf8_encode($html));
 $mpdf->Output($nama_dokumen.".pdf",'I');
 exit;
-}	
+}
 ?>
-

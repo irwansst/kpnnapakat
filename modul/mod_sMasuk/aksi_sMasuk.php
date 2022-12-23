@@ -18,7 +18,7 @@ $op		=$_GET[op];  $act	=$_GET[act];
 
 if ($op=='sMasuk' AND $act=='input'){
 	$date	= date("Y-m-d");
-	mysql_query("INSERT INTO smasuk(
+	mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO smasuk(
 									nAgenda,
 									jSurat,
 									uSifat,
@@ -48,7 +48,7 @@ if ($op=='sMasuk' AND $act=='input'){
 	header('location:../../show.php?op='.$op);
 }
 elseif ($op=='sMasuk' AND $act=='update'){
-  mysql_query("UPDATE smasuk SET 
+  mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE smasuk SET 
 								 nAgenda	= '$_POST[nagenda]',
 								 jSurat		= '$_POST[jsurat]',
 								 tMasuk		= '$_POST[tmasuk]',
@@ -75,7 +75,7 @@ elseif ($op=='sMasuk' AND $act=='upload'){
 				if(move_uploaded_file($img_loc,$folder.$img))
 				{
 					echo "<script>alert('Upload Data Sukses!!!');</script>";
-					mysql_query("UPDATE smasuk SET nfile = '$nmfile' WHERE id_sMasuk='$_POST[id]'");
+					mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE smasuk SET nfile = '$nmfile' WHERE id_sMasuk='$_POST[id]'");
   					header('location:../../show.php?op='.$op);
 				}else{
 					echo "<script>alert('Upload Gagal');</script>";

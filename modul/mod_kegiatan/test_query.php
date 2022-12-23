@@ -1,8 +1,8 @@
 <?php
 include "../../config/koneksi.php";
-$tampil	= mysql_query("SELECT * from rjabatan");
+$tampil	= mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * from rjabatan");
 
-   while ($r=mysql_fetch_array($tampil)){
+   while ($r=mysqli_fetch_array($tampil)){
    		echo "$r[kode] <br />";
 
     }

@@ -37,8 +37,8 @@ switch($_GET[act]){
 		<tbody>";
 		
 	$no=1;
-    $tampil	= mysql_query("SELECT * FROM sarsip WHERE  periode='$_SESSION[periode]' ORDER BY stamp DESC");
-    while ($r=mysql_fetch_array($tampil)){
+    $tampil	= mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM sarsip WHERE  periode='$_SESSION[periode]' ORDER BY stamp DESC");
+    while ($r=mysqli_fetch_array($tampil)){
 	
        echo "<tr>
 			 <td align=center>$no</td>
@@ -81,8 +81,8 @@ switch($_GET[act]){
 			echo "	<label><span>KLASIFIKASI ARSIP</span>";
 		    echo  "<select name='jklasifikasi' style='width:450px'>
             <option value=0 selected>- KLASIFIKASI -</option>";
-            $tampil=mysql_query("SELECT * FROM rklasifikasi ORDER BY kode ASC");
-            while($t=mysql_fetch_array($tampil)){
+            $tampil=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rklasifikasi ORDER BY kode ASC");
+            while($t=mysqli_fetch_array($tampil)){
             echo "<option value='$t[kode]'>$t[kode]&emsp;&emsp;|&emsp;$t[jenis]</option>";
             }
 			echo "</select></label>";
@@ -91,8 +91,8 @@ switch($_GET[act]){
 			echo "	<label><span>JENIS ARSIP</span>";
 		    echo  "<select name='jarsip' style='width:155px'>
             <option value=0 selected>- JENIS -</option>";
-            $metu=mysql_query("SELECT * FROM rarsip ORDER BY jnsarsip ASC");
-            while($m=mysql_fetch_array($metu)){
+            $metu=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rarsip ORDER BY jnsarsip ASC");
+            while($m=mysqli_fetch_array($metu)){
             echo "<option value='$m[jnsarsip]'>$m[jnsarsip]</option>";
             }
 			echo "</select></label>
@@ -103,8 +103,8 @@ switch($_GET[act]){
 			echo "	<label><span>BAGIAN/BIDANG</span>";
 		    echo  "<select name='bidang' style='width:450px'>
             <option value=0 selected>- BAGIAN/BIDANG -</option>";
-            $metu=mysql_query("SELECT * FROM rjabatan ");
-            while($m=mysql_fetch_array($metu)){
+            $metu=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rjabatan ");
+            while($m=mysqli_fetch_array($metu)){
             echo "<option value='$m[kode]'>$m[kode]&emsp;|&emsp;$m[bidang]</option>";
             }
 			echo "</select></label>";
@@ -156,9 +156,9 @@ switch($_GET[act]){
 			
 			<label  ><span>FILE ARSIP	</span><input name='img' type='file' style='width:450px'  /></label>";
 			
-			$show	= mysql_query("SELECT * FROM smasuk WHERE  id_sMasuk='$_GET[id]'");
+			$show	= mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM smasuk WHERE  id_sMasuk='$_GET[id]'");
     
-	if ($s=mysql_fetch_array($show)){
+	if ($s=mysqli_fetch_array($show)){
 		echo "<label><span>KETERANGAN</span><textarea align='left' name='ket' style='width:450px' rows='7'>Surat \nTanggal Agenda: $s[tMasuk] \nNomor Agenda: $s[nAgenda] \nNomor Surat: $s[nSurat] \nTanggal Surat: $s[tSurat] \nPerihal Surat: $s[hal] \nAsal Surat: $s[dari]</textarea></label>";
 		}else{
 		echo "<label><span>KETERANGAN</span><textarea align='left' name='ket' cols='58' rows='7'></textarea></label>";
@@ -174,8 +174,8 @@ switch($_GET[act]){
   
 
   case "editsArsip":
-    $edit = mysql_query("SELECT * FROM sArsip WHERE id_sArsip='$_GET[id]'");
-    $r    = mysql_fetch_array($edit);
+    $edit = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM sArsip WHERE id_sArsip='$_GET[id]'");
+    $r    = mysqli_fetch_array($edit);
 	
 	
 	echo "<h1>Ubah sArsip</h1>
@@ -190,8 +190,8 @@ switch($_GET[act]){
 		<label><span>JENIS SURAT</span>";
 		    echo  "<select name='jsurat'>
             <option value=$r[jSurat] selected>$r[jSurat]</option>";
-            $tampil=mysql_query("SELECT * FROM jenis ORDER BY kodejenis ASC");
-            while($t=mysql_fetch_array($tampil)){
+            $tampil=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM jenis ORDER BY kodejenis ASC");
+            while($t=mysqli_fetch_array($tampil)){
             echo "<option value='$t[kodejenis]'>$t[kodejenis]</option>";
             }
 		  echo "</select></label>";
@@ -200,8 +200,8 @@ switch($_GET[act]){
 			echo "	<label><span>SIFAT SURAT</span>";
 		    echo  "<select name='usifat'>
             <option value='$r[uSifat]' selected>$r[uSifat]</option>";
-            $metu=mysql_query("SELECT * FROM rSifat ORDER BY id ASC");
-            while($m=mysql_fetch_array($metu)){
+            $metu=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rSifat ORDER BY id ASC");
+            while($m=mysqli_fetch_array($metu)){
             echo "<option value='$m[sifat]'>$m[sifat]</option>";
             }
 			echo "</select></label>
@@ -220,8 +220,8 @@ switch($_GET[act]){
 			//dropdown disposisi surat
 			echo "<select name='dispo'>
 					<option value='$r[dispo]' selected>$r[dispo]</OPTION>";
-					$jabatan=mysql_query("SELECT * FROM rJabatan ORDER BY kode ASC");
-					while ($jb=mysql_fetch_array($jabatan)){
+					$jabatan=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rJabatan ORDER BY kode ASC");
+					while ($jb=mysqli_fetch_array($jabatan)){
 					echo "<option value='$jb[jabatan]'>$jb[jabatan]</option>";		
 					}
 			echo "</select></label>
@@ -231,8 +231,8 @@ switch($_GET[act]){
 			//dropdown status surat
 			echo "<select name='status'>
 					<option value=$r[status] selected>$r[status]</OPTION>";
-					$status=mysql_query("SELECT * FROM rStatus ORDER BY id ASC");
-					while ($st=mysql_fetch_array($status)){
+					$status=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rStatus ORDER BY id ASC");
+					while ($st=mysqli_fetch_array($status)){
 					echo "<option value='$st[status]'>$st[status]</option>";		
 					}
 			echo "</select></label>
@@ -243,8 +243,8 @@ switch($_GET[act]){
     break;
 	
 	case "lihatsArsip":
-    $edit = mysql_query("SELECT a.stamp,a.periode,a.nArsip,a.tArsip,a.`jKlasifikasi`,b.`jenis` as urKlasifikasi,a.`jArsip`,a.status,a.inaktif,a.bidang,c.`urbidang` as urBidang,a.rak,a.`folder`,a.`baris`,a.`kolom`,a.file,a.`keterangan` FROM sarsip a LEFT JOIN rklasifikasi b ON TRIM(a.jKlasifikasi)=TRIM(b.kode) LEFT JOIN rjabatan c ON a.`bidang`=c.kode");
-    $r    = mysql_fetch_array($edit);
+    $edit = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT a.stamp,a.periode,a.nArsip,a.tArsip,a.`jKlasifikasi`,b.`jenis` as urKlasifikasi,a.`jArsip`,a.status,a.inaktif,a.bidang,c.`urbidang` as urBidang,a.rak,a.`folder`,a.`baris`,a.`kolom`,a.file,a.`keterangan` FROM sarsip a LEFT JOIN rklasifikasi b ON TRIM(a.jKlasifikasi)=TRIM(b.kode) LEFT JOIN rjabatan c ON a.`bidang`=c.kode");
+    $r    = mysqli_fetch_array($edit);
 	
 	$tgl	= tgl_indo($r[tSurat]);
 	$tgl1	= tgl_indo($r[tMasuk]);

@@ -42,8 +42,8 @@ switch($_GET[act]){
 		</thead>
 		<tbody>";
 		
-    $tampil	= mysql_query("SELECT * FROM rjabatan ORDER BY  id ASC");
-    while ($r=mysql_fetch_array($tampil)){
+    $tampil	= mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rjabatan ORDER BY  id ASC");
+    while ($r=mysqli_fetch_array($tampil)){
 	
        echo "<tr>
 			 <td align=right >$r[id]</td>
@@ -83,8 +83,8 @@ switch($_GET[act]){
   
 
   case "editrJabatan":
-    $edit = mysql_query("SELECT * FROM rJabatan WHERE id='$_GET[id]'");
-    $r    = mysql_fetch_array($edit);
+    $edit = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rJabatan WHERE id='$_GET[id]'");
+    $r    = mysqli_fetch_array($edit);
 	
 	
 	echo "<h1>Ubah Jabatan</h1>
@@ -104,7 +104,7 @@ switch($_GET[act]){
     break;
 	
 	case "deleterJabatan":
-	mysql_query("DELETE FROM rJabatan WHERE id='$_GET[id]' ");
+	mysqli_query($GLOBALS["___mysqli_ston"], "DELETE FROM rJabatan WHERE id='$_GET[id]' ");
 	header('location:rJabatan.php');
     break; 
 

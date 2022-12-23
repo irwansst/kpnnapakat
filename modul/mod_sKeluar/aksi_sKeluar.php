@@ -20,15 +20,15 @@ if ($op=='sKeluar' AND $act=='input'){
 	$date	= date("Y-m-d");
 	
 	//membuat nomor agenda surat keluar
-	$q = mysql_query("select MAX(nAgenda) as nAgenda from skeluar where jSurat='$_POST[jsurat]' and periode='$_SESSION[periode]'");
-	$r = mysql_fetch_array($q);
+	$q = mysqli_query($GLOBALS["___mysqli_ston"], "select MAX(nAgenda) as nAgenda from skeluar where jSurat='$_POST[jsurat]' and periode='$_SESSION[periode]'");
+	$r = mysqli_fetch_array($q);
 	if($r){
 		$noagd=$r[nAgenda]+1;
 	}else{
 		$noagd=1;
 	}
 		
-	mysql_query("INSERT INTO skeluar(
+	mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO skeluar(
 									tKeluar,
 									nAgenda,
 									jSurat,
@@ -56,7 +56,7 @@ if ($op=='sKeluar' AND $act=='input'){
 	header('location:../../show.php?op='.$op);
 }
 elseif ($op=='sKeluar' AND $act=='update'){
-  mysql_query("UPDATE skeluar SET 
+  mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE skeluar SET 
 								 tKeluar	= '$_POST[tkeluar]',
 								 nAgenda	= '$_POST[nagenda]',
 								 jSurat		= '$_POST[jsurat]',
@@ -84,7 +84,7 @@ elseif ($op=='sKeluar' AND $act=='upload'){
 				if(move_uploaded_file($img_loc,$folder.$img))
 				{
 					echo "<script>alert('Upload Data Sukses!!!');</script>";
-					mysql_query("UPDATE skeluar SET nfile = '$nmfile' WHERE id_sKeluar='$_POST[id]'");
+					mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE skeluar SET nfile = '$nmfile' WHERE id_sKeluar='$_POST[id]'");
   					header('location:../../show.php?op='.$op);
 				}else{
 					echo "<script>alert('Upload Gagal');</script>";

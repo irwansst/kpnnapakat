@@ -38,8 +38,8 @@ switch($_GET[act]){
 		<tbody>";
 		
 	$no=1;
-    $tampil	= mysql_query("SELECT * FROM sKeluar WHERE  periode='$_SESSION[periode]' ORDER BY tMasuk DESC");
-    while ($r=mysql_fetch_array($tampil)){
+    $tampil	= mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM sKeluar WHERE  periode='$_SESSION[periode]' ORDER BY tMasuk DESC");
+    while ($r=mysqli_fetch_array($tampil)){
 	
        echo "<tr>
 			 <td align=center>$no</td>
@@ -75,8 +75,8 @@ switch($_GET[act]){
 			<label><span>TANGGAL REKAM			</span><input type='text' value='".tgl_indo(date("Y m d"))."' size='15' style='text-align:right;' disabled></label>";	
 			
 			//membuat nomor agenda baru secara otomatis
-			$nom = mysql_query("SELECT nAgenda from sKeluar ORDER BY id_sKeluar DESC LIMIT 1");
-			while($t=mysql_fetch_array($nom)){
+			$nom = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT nAgenda from sKeluar ORDER BY id_sKeluar DESC LIMIT 1");
+			while($t=mysqli_fetch_array($nom)){
             $int=(float)$t[nAgenda];
 			$agdbaru=$int+1;
 			$noagd=sprintf("%06d", $agdbaru);
@@ -87,8 +87,8 @@ switch($_GET[act]){
 			echo "	<label><span>JENIS SURAT</span>";
 		    echo  "<select name='jsurat'>
             <option value=0 selected>- JENIS SURAT -</option>";
-            $tampil=mysql_query("SELECT * FROM jenis ORDER BY kodejenis ASC");
-            while($t=mysql_fetch_array($tampil)){
+            $tampil=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM jenis ORDER BY kodejenis ASC");
+            while($t=mysqli_fetch_array($tampil)){
             echo "<option value='$t[kodejenis]'>$t[kodejenis]</option>";
             }
 			echo "</select></label>";
@@ -97,8 +97,8 @@ switch($_GET[act]){
 			echo "	<label><span>SIFAT SURAT</span>";
 		    echo  "<select name='usifat'>
             <option value=0 selected>- SIFAT SURAT -</option>";
-            $metu=mysql_query("SELECT * FROM rSifat ORDER BY id ASC");
-            while($m=mysql_fetch_array($metu)){
+            $metu=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rSifat ORDER BY id ASC");
+            while($m=mysqli_fetch_array($metu)){
             echo "<option value='$m[sifat]'>$m[sifat]</option>";
             }
 			echo "</select></label>
@@ -117,8 +117,8 @@ switch($_GET[act]){
 			//dropdown disposisi surat
 			echo "<select name='dispo'>
 					<option value=0 selected>- DAFTAR PEJABAT -</OPTION>";
-					$kueri=mysql_query("SELECT * FROM rJabatan ORDER BY kode ASC");
-					while ($k=mysql_fetch_array($kueri)){
+					$kueri=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rJabatan ORDER BY kode ASC");
+					while ($k=mysqli_fetch_array($kueri)){
 					echo "<option value='$k[jabatan]'>$k[jabatan]</option>";		
 					}
 			echo "</select></label>
@@ -129,8 +129,8 @@ switch($_GET[act]){
 			//dropdown status surat
 			echo "<select name='status'>
 					<option value=0 selected>- STATUS -</OPTION>";
-					$status=mysql_query("SELECT * FROM rStatus ORDER BY id ASC");
-					while ($st=mysql_fetch_array($status)){
+					$status=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rStatus ORDER BY id ASC");
+					while ($st=mysqli_fetch_array($status)){
 					echo "<option value='$st[status]'>$st[status]</option>";		
 					}
 			echo "</select></label>
@@ -145,8 +145,8 @@ switch($_GET[act]){
   
 
   case "editsKeluar":
-    $edit = mysql_query("SELECT * FROM sKeluar WHERE id_sKeluar='$_GET[id]'");
-    $r    = mysql_fetch_array($edit);
+    $edit = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM sKeluar WHERE id_sKeluar='$_GET[id]'");
+    $r    = mysqli_fetch_array($edit);
 	
 	
 	echo "<h1>Ubah sKeluar</h1>
@@ -161,8 +161,8 @@ switch($_GET[act]){
 		<label><span>JENIS SURAT</span>";
 		    echo  "<select name='jsurat'>
             <option value=$r[jSurat] selected>$r[jSurat]</option>";
-            $tampil=mysql_query("SELECT * FROM jenis ORDER BY kodejenis ASC");
-            while($t=mysql_fetch_array($tampil)){
+            $tampil=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM jenis ORDER BY kodejenis ASC");
+            while($t=mysqli_fetch_array($tampil)){
             echo "<option value='$t[kodejenis]'>$t[kodejenis]</option>";
             }
 		  echo "</select></label>";
@@ -171,8 +171,8 @@ switch($_GET[act]){
 			echo "	<label><span>SIFAT SURAT</span>";
 		    echo  "<select name='usifat'>
             <option value='$r[uSifat]' selected>$r[uSifat]</option>";
-            $metu=mysql_query("SELECT * FROM rSifat ORDER BY id ASC");
-            while($m=mysql_fetch_array($metu)){
+            $metu=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rSifat ORDER BY id ASC");
+            while($m=mysqli_fetch_array($metu)){
             echo "<option value='$m[sifat]'>$m[sifat]</option>";
             }
 			echo "</select></label>
@@ -191,8 +191,8 @@ switch($_GET[act]){
 			//dropdown disposisi surat
 			echo "<select name='dispo'>
 					<option value='$r[dispo]' selected>$r[dispo]</OPTION>";
-					$jabatan=mysql_query("SELECT * FROM rJabatan ORDER BY kode ASC");
-					while ($jb=mysql_fetch_array($jabatan)){
+					$jabatan=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rJabatan ORDER BY kode ASC");
+					while ($jb=mysqli_fetch_array($jabatan)){
 					echo "<option value='$jb[jabatan]'>$jb[jabatan]</option>";		
 					}
 			echo "</select></label>
@@ -202,8 +202,8 @@ switch($_GET[act]){
 			//dropdown status surat
 			echo "<select name='status'>
 					<option value=$r[status] selected>$r[status]</OPTION>";
-					$status=mysql_query("SELECT * FROM rStatus ORDER BY id ASC");
-					while ($st=mysql_fetch_array($status)){
+					$status=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rStatus ORDER BY id ASC");
+					while ($st=mysqli_fetch_array($status)){
 					echo "<option value='$st[status]'>$st[status]</option>";		
 					}
 			echo "</select></label>
@@ -214,8 +214,8 @@ switch($_GET[act]){
     break;
 	
 	case "lihatsKeluar":
-    $edit = mysql_query("SELECT * FROM sKeluar WHERE id_sKeluar='$_GET[id]'");
-    $r    = mysql_fetch_array($edit);
+    $edit = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM sKeluar WHERE id_sKeluar='$_GET[id]'");
+    $r    = mysqli_fetch_array($edit);
 	
 	$tgl	= tgl_indo($r[tSurat]);
 	$tgl1	= tgl_indo($r[tMasuk]);

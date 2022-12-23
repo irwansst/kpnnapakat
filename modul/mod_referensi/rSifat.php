@@ -38,8 +38,8 @@ switch($_GET[act]){
 		</thead>
 		<tbody>";
 		
-    $tampil	= mysql_query("SELECT * FROM rSifat ORDER BY  sifat ASC");
-    while ($r=mysql_fetch_array($tampil)){
+    $tampil	= mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rSifat ORDER BY  sifat ASC");
+    while ($r=mysqli_fetch_array($tampil)){
 	
        echo "<tr>
 			 <td align=center >$r[id]</td>
@@ -72,8 +72,8 @@ switch($_GET[act]){
   
 
   case "editrSifat":
-    $edit = mysql_query("SELECT * FROM rSifat WHERE id='$_GET[id]'");
-    $r    = mysql_fetch_array($edit);
+    $edit = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rSifat WHERE id='$_GET[id]'");
+    $r    = mysqli_fetch_array($edit);
 	
 	
 	echo "<h1>Ubah rSifat</h1>
@@ -91,7 +91,7 @@ switch($_GET[act]){
     break;
 	
 	case "deleterSifat":
-	mysql_query("DELETE FROM rsifat WHERE kodeSifat='$_GET[id]' ");
+	mysqli_query($GLOBALS["___mysqli_ston"], "DELETE FROM rsifat WHERE kodeSifat='$_GET[id]' ");
 	header('location:rSifat.php');
     break; 
 

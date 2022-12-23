@@ -18,7 +18,7 @@ $op		=$_GET[op];  $act	=$_GET[act];
 
 if ($op=='rArsip' AND $act=='input'){
 	$date	= date("Y-m-d");
-	mysql_query("INSERT INTO rarsip(
+	mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO rarsip(
 									id,
 									jnsarsip) 
 					                VALUES(
@@ -28,7 +28,7 @@ if ($op=='rArsip' AND $act=='input'){
 	header('location:rArsip.php');
 }
 elseif ($op=='rArsip' AND $act=='update'){
-  mysql_query("UPDATE rarsip SET 
+  mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE rarsip SET 
 								 id	= '$_POST[kodeJnsArsip]',
 								 jnsarsip	= '$_POST[urJnsArsip]'
 								 WHERE id  = '$_POST[kodeJnsArsip]'");
@@ -37,7 +37,7 @@ elseif ($op=='rArsip' AND $act=='update'){
 
 //MENGHAPUS DATA
 elseif ($op=='rArsip' AND $act=='delete'){
-  mysql_query("DELETE from rarsip WHERE id   = '$_POST[kodeJnsArsip]'");
+  mysqli_query($GLOBALS["___mysqli_ston"], "DELETE from rarsip WHERE id   = '$_POST[kodeJnsArsip]'");
   header('location:rArsip.php');
 }
 

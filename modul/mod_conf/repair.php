@@ -39,13 +39,13 @@ switch($_GET[act]){
 	
 	if($_POST['repair']==1){
 		$query = "SHOW TABLES";
-		$hasil = mysql_query($query);
+		$hasil = mysqli_query($GLOBALS["___mysqli_ston"], $query);
 		echo "<br><br><br>";
-		while ($data = mysql_fetch_row($hasil))
+		while ($data = mysqli_fetch_row($hasil))
 		{
 			$query2 = "optimize table `".$data[0]."`";
-			$hasil2 = mysql_query($query2);
-			$data2  = mysql_fetch_array($hasil2);
+			$hasil2 = mysqli_query($GLOBALS["___mysqli_ston"], $query2);
+			$data2  = mysqli_fetch_array($hasil2);
 			echo $query2."".$data2[3].", ";
 		}
 		include "pro.php";
@@ -55,13 +55,13 @@ switch($_GET[act]){
 	elseif($_POST['repair']==2){
 	
 		$query = "SHOW TABLES";
-		$hasil = mysql_query($query);
+		$hasil = mysqli_query($GLOBALS["___mysqli_ston"], $query);
 		echo "<br><br><br>";
-		while ($data = mysql_fetch_row($hasil))
+		while ($data = mysqli_fetch_row($hasil))
 		{
 			$query2 = "repair table `".$data[0]."`";
-			$hasil2 = mysql_query($query2);
-			$data2  = mysql_fetch_array($hasil2);
+			$hasil2 = mysqli_query($GLOBALS["___mysqli_ston"], $query2);
+			$data2  = mysqli_fetch_array($hasil2);
 			echo $query2."".$data2[3].", ";
 		}
 		include "pro.php";

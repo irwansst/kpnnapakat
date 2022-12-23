@@ -17,8 +17,8 @@ include "../../config/fungsi_indotgl.php";
 $op		=$_GET[op];  $act	=$_GET[act];
 
 if ($op=='sPerintah' AND $act=='input'){
-	$count 	= mysql_query("SELECT count(*) as jml FROM sperintah WHERE periode='$_SESSION[periode]'");
-	$rj		= mysql_fetch_array($count);
+	$count 	= mysqli_query($GLOBALS["___mysqli_ston"], "SELECT count(*) as jml FROM sperintah WHERE periode='$_SESSION[periode]'");
+	$rj		= mysqli_fetch_array($count);
 	$tn		= ($rj[jml]+1);
 	$newNO  = sprintf("%04s", $tn);
 	$date	= date("Y-m-d");
@@ -27,7 +27,7 @@ if ($op=='sPerintah' AND $act=='input'){
 	$b     	= getBulan($m);
 	$blnThn = '/'.$m.'/'.$y;
 	$pilih	= $_POST[sifat];
-  mysql_query("INSERT INTO sperintah(
+  mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO sperintah(
 									nsurat,
 									kdwil,
 									kdmas,
@@ -51,7 +51,7 @@ if ($op=='sPerintah' AND $act=='input'){
 	header('location:../../show.php?op='.$op);
 }
 elseif ($op=='sPerintah' AND $act=='update'){
-  mysql_query("UPDATE sperintah SET 
+  mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE sperintah SET 
 								 kdwil  	= '$_POST[kdwil]',
 								 kdmas  	= '$_POST[kdmas]',
                                  pelaksana 	= '$_POST[pelaksana]',

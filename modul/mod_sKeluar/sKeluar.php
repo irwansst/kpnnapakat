@@ -37,8 +37,8 @@ switch($_GET[act]){
 		<tbody>";
 		
 	$no=1;
-    $tampil	= mysql_query("SELECT * FROM sKeluar WHERE  periode='$_SESSION[periode]' ORDER BY stamp DESC");
-    while ($r=mysql_fetch_array($tampil)){
+    $tampil	= mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM sKeluar WHERE  periode='$_SESSION[periode]' ORDER BY stamp DESC");
+    while ($r=mysqli_fetch_array($tampil)){
 	$noagd=sprintf("%06d",$r[nAgenda]);
 	
        echo "<tr>
@@ -98,8 +98,8 @@ switch($_GET[act]){
 			echo "	<label><span>JENIS SURAT</span>";
 		    echo  "<select name='jsurat'>
             <option value=0 selected>- JENIS SURAT -</option>";
-            $tampil=mysql_query("SELECT * FROM jenis ORDER BY kodejenis ASC");
-            while($t=mysql_fetch_array($tampil)){
+            $tampil=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM jenis ORDER BY kodejenis ASC");
+            while($t=mysqli_fetch_array($tampil)){
             echo "<option value='$t[kodejenis]'>$t[kodejenis]</option>";
             }
 			echo "</select></label>";
@@ -108,8 +108,8 @@ switch($_GET[act]){
 			echo "	<label><span>KONTROL SURAT</span>";
 		    echo  "<select name='nkontrol'>
             <option value=0 selected>- KONTROL SURAT -</option>";
-            $tampil=mysql_query("SELECT kontrol FROM rjabatan ORDER BY kode ASC");
-            while($t=mysql_fetch_array($tampil)){
+            $tampil=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT kontrol FROM rjabatan ORDER BY kode ASC");
+            while($t=mysqli_fetch_array($tampil)){
             echo "<option value='$t[kontrol]'>$t[kontrol]</option>";
             }
 			echo "</select></label>";
@@ -118,8 +118,8 @@ switch($_GET[act]){
 			echo "	<label><span>SIFAT SURAT</span>";
 		    echo  "<select name='usifat'>
             <option value=0 selected>- SIFAT SURAT -</option>";
-            $metu=mysql_query("SELECT * FROM rSifat ORDER BY id ASC");
-            while($m=mysql_fetch_array($metu)){
+            $metu=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rSifat ORDER BY id ASC");
+            while($m=mysqli_fetch_array($metu)){
             echo "<option value='$m[sifat]'>$m[sifat]</option>";
             }
 			echo "</select></label>
@@ -129,8 +129,8 @@ switch($_GET[act]){
 			echo "	<label><span>PENERBIT SURAT</span>";
 		    echo  "<select name='penerbit'>
             <option value=0 selected>- BIDANG ATAU SEKSI-</option>";
-            $melu=mysql_query("SELECT * FROM rjabatan ORDER BY id ASC");
-            while($ml=mysql_fetch_array($melu)){
+            $melu=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rjabatan ORDER BY id ASC");
+            while($ml=mysqli_fetch_array($melu)){
             echo "<option value='$ml[jabatan]'>$ml[jabatan]</option>";
             }
 			echo "</select></label>		
@@ -148,8 +148,8 @@ switch($_GET[act]){
   
 
   case "editsKeluar":
-    $edit = mysql_query("SELECT * FROM skeluar WHERE id_sKeluar='$_GET[id]'");
-    $r    = mysql_fetch_array($edit);
+    $edit = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM skeluar WHERE id_sKeluar='$_GET[id]'");
+    $r    = mysqli_fetch_array($edit);
 	
 	
 	echo "<h1>Ubah Surat Keluar</h1>
@@ -164,8 +164,8 @@ switch($_GET[act]){
 		<label><span>JENIS SURAT</span>";
 		    echo  "<select name='jsurat'>
             <option value=$r[jSurat] selected>$r[jSurat]</option>";
-            $tampil=mysql_query("SELECT * FROM jenis ORDER BY kodejenis ASC");
-            while($t=mysql_fetch_array($tampil)){
+            $tampil=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM jenis ORDER BY kodejenis ASC");
+            while($t=mysqli_fetch_array($tampil)){
             echo "<option value='$t[kodejenis]'>$t[kodejenis]</option>";
             }
 		  echo "</select></label>";
@@ -174,8 +174,8 @@ switch($_GET[act]){
 			echo "	<label><span>KONTROL SURAT</span>";
 		    echo  "<select name='nkontrol'>
             <option value=$r[nKontrol] selected>$r[nKontrol]</option>";
-            $tampil=mysql_query("SELECT kontrol FROM rjabatan ORDER BY kode ASC");
-            while($t=mysql_fetch_array($tampil)){
+            $tampil=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT kontrol FROM rjabatan ORDER BY kode ASC");
+            while($t=mysqli_fetch_array($tampil)){
             echo "<option value='$t[kontrol]'>$t[kontrol]</option>";
             }
 			echo "</select></label>";
@@ -184,8 +184,8 @@ switch($_GET[act]){
 			echo "	<label><span>SIFAT SURAT</span>";
 		    echo  "<select name='usifat'>
             <option value=$r[uSifat] selected>$r[uSifat]</option>";
-            $metu=mysql_query("SELECT * FROM rSifat ORDER BY id ASC");
-            while($m=mysql_fetch_array($metu)){
+            $metu=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rSifat ORDER BY id ASC");
+            while($m=mysqli_fetch_array($metu)){
             echo "<option value='$m[sifat]'>$m[sifat]</option>";
             }
 			echo "</select></label>
@@ -196,8 +196,8 @@ switch($_GET[act]){
 			echo "	<label><span>PENERBIT SURAT</span>";
 		    echo  "<select name='penerbit'>
             <option value='$r[penerbit]' selected>$r[penerbit]</option>";
-            $melu=mysql_query("SELECT * FROM rjabatan ORDER BY id ASC");
-            while($ml=mysql_fetch_array($melu)){
+            $melu=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rjabatan ORDER BY id ASC");
+            while($ml=mysqli_fetch_array($melu)){
             echo "<option value='$ml[jabatan]'>$ml[jabatan]</option>";
             }
 			echo "</select></label>			
@@ -215,8 +215,8 @@ switch($_GET[act]){
     break;
 	
 	case "lihatsKeluar":
-    $edit = mysql_query("SELECT * FROM sKeluar as a left join jenis as b on a.jSurat=b.kodejenis WHERE id_sKeluar='$_GET[id]'");
-    $r    = mysql_fetch_array($edit);
+    $edit = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM sKeluar as a left join jenis as b on a.jSurat=b.kodejenis WHERE id_sKeluar='$_GET[id]'");
+    $r    = mysqli_fetch_array($edit);
 	
 	$tgl	= tgl_indo($r[tSurat]);
 	$tgl1	= tgl_indo($r[tMasuk]);
@@ -264,8 +264,8 @@ switch($_GET[act]){
 			echo "	<label><span>KLASIFIKASI ARSIP</span>";
 		    echo  "<select name='jklasifikasi' style='width:450px'>
             <option value=0 selected>- KLASIFIKASI -</option>";
-            $tampil=mysql_query("SELECT * FROM rklasifikasi ORDER BY kode ASC");
-            while($t=mysql_fetch_array($tampil)){
+            $tampil=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rklasifikasi ORDER BY kode ASC");
+            while($t=mysqli_fetch_array($tampil)){
             echo "<option value='$t[kode]'>$t[kode]&emsp;&emsp;|&emsp;$t[jenis]</option>";
             }
 			echo "</select></label>";
@@ -274,8 +274,8 @@ switch($_GET[act]){
 			echo "	<label><span>JENIS ARSIP</span>";
 		    echo  "<select name='jarsip' style='width:155px'>
             <option value=0 selected>- JENIS -</option>";
-            $metu=mysql_query("SELECT * FROM rarsip ORDER BY jnsarsip ASC");
-            while($m=mysql_fetch_array($metu)){
+            $metu=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rarsip ORDER BY jnsarsip ASC");
+            while($m=mysqli_fetch_array($metu)){
             echo "<option value='$m[jnsarsip]'>$m[jnsarsip]</option>";
             }
 			echo "</select></label>
@@ -286,8 +286,8 @@ switch($_GET[act]){
 			echo "	<label><span>BAGIAN/BIDANG</span>";
 		    echo  "<select name='bidang' style='width:450px'>
             <option value=0 selected>- BAGIAN/BIDANG -</option>";
-            $metu=mysql_query("SELECT * FROM rjabatan ");
-            while($m=mysql_fetch_array($metu)){
+            $metu=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rjabatan ");
+            while($m=mysqli_fetch_array($metu)){
             echo "<option value='$m[kode]'>$m[kode]&emsp;|&emsp;$m[urbidang]</option>";
             }
 			echo "</select></label>";
@@ -347,9 +347,9 @@ switch($_GET[act]){
 			
 			echo "</select></label>";
 			
-			$show	= mysql_query("SELECT * FROM skeluar WHERE  id_sKeluar='$_GET[id]'");
+			$show	= mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM skeluar WHERE  id_sKeluar='$_GET[id]'");
     
-	if ($s=mysql_fetch_array($show)){
+	if ($s=mysqli_fetch_array($show)){
 		echo "<label ><span >BERKAS FILE</span><input type='text' name='nmFile' value='$s[nfile]'></label>";
 		echo "<label><span>KETERANGAN</span><textarea align='left' name='ket' style='width:450px' rows='7'>Surat \nTanggal Agenda: $s[tKeluar] \nNomor Surat: $s[nAgenda]$s[nKontrol]$s[periode] \nPenerbit: $s[penerbit] \nKepada: $s[kepada] \nHal Surat: $s[hal] \nKeterangan: $s[ket]</textarea></label>";
 		}else{

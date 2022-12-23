@@ -18,7 +18,7 @@ $op		=$_GET[op];  $act	=$_GET[act];
 
 if ($op=='iku' AND $act=='input'){
 	$date	= date("Y-m-d");
-	mysql_query("INSERT INTO iku(
+	mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO iku(
 									id,
 									user,
 									iku,
@@ -32,7 +32,7 @@ if ($op=='iku' AND $act=='input'){
 	header('location:../../show.php?op='.$op);
 }
 elseif ($op=='iku' AND $act=='update'){
-  mysql_query("UPDATE riku SET 
+  mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE riku SET 
 								 kode		= '$_POST[nKode]',
 								 urbidang	= '$_POST[urBidang]',
 								 iku	= '$_POST[uriku]',
@@ -44,7 +44,7 @@ elseif ($op=='iku' AND $act=='update'){
 
 // MENGHAPUS DATA
 elseif ($op=='iku' AND $act=='delete'){
-  mysql_query("DELETE FROM iku WHERE id='$_GET[id]' ");
+  mysqli_query($GLOBALS["___mysqli_ston"], "DELETE FROM iku WHERE id='$_GET[id]' ");
 	header('location:../../show.php?op='.$op);
 }
 //

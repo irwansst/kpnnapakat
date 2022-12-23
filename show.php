@@ -22,6 +22,8 @@ if (empty($_SESSION['username']) AND empty($_SESSION['passuser']) AND $_SESSION[
 }
 else{
 
+//ambil tahun anggaran dari session_start
+$tahun = $_SESSION[periode];
 ?>
 
 <!DOCTYPE html>
@@ -35,16 +37,20 @@ else{
   <meta name="description" content="">
   <meta name="author" content="zodiac" >
 
-  <title>KPN Napakat</title>
+  <title>KPN NAPAKAT</title>
 
   <!-- Custom fonts for this template-->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+  <link rel="icon" type="image/png" href="img/favicon-16x16.png"/>
+  <link rel="icon" type="image/png" href="http://localhost/kpnnapakat/img/favicon-16x16.png" />
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/fontawesome.min.css" rel="stylesheet" type="text/css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/brands.min.css" rel="stylesheet" type="text/css">
 
-  <!-- Custom styles for this template-->
+
+  <!-- Custom styles for this template -->
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/bootstrap-datetimepicker.css">
-
+	<link rel="stylesheet" href="vendor/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css">
 </head>
 
 <body id="page-top">
@@ -59,13 +65,15 @@ else{
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="?op=home">
         <div class="sidebar-brand-icon">
           <!-- <i class="fas fa-address-book"></i> -->
-          <img src="img/koperasi.png" width="48px" height="48px">
+          <img src="img/logo-koperasi.png" width="48px" height="48px">
         </div>
-        <div class="sidebar-brand-text mx-3">KPN Napakat</div>
+        <div class="sidebar-brand-text mx-3">NAPAKAT</div>
       </a>
 
       <!-- Divider -->
-      <hr class="sidebar-divider my-0">
+      <hr class="sidebar-divider">
+			<p align="center"><img class="img-profile rounded-circle" src="<?php echo "photos/".$_SESSION[namauser].".jpg"; ?>" width="128px" height="140px" ></p>
+			<hr class="sidebar-divider">
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
@@ -73,6 +81,7 @@ else{
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
+
 
       <!-- Divider -->
       <hr class="sidebar-divider">
@@ -82,29 +91,110 @@ else{
         Aplikasi
       </div>
 
-      <!-- Nav Item - KPN Napakat Collapse Menu -->
+      <!-- Nav Item - Anggota Collapse Menu -->
+
+
+			<li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          <i class="fas fa-fw fa-users"></i>
+          <span>Frontliners</span>
+        </a>
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" href="?op=uraian">Uraian SPM</a>
+						<a class="collapse-item" href="?op=bas">Bagan Akuntansi Standar</a>
+						<a class="collapse-item" href="?op=blokir">Pemblokiran SPM</a>
+        </div>
+      </li>
+
+			<li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRekon" aria-expanded="true" aria-controls="collapseRekon">
+          <i class="fas fa-fw fa-list-alt"></i>
+          <span>LPJ Bendahara</span>
+        </a>
+        <div id="collapseRekon" class="collapse" aria-labelledby="headingRekon" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" href="?op=elpj">LPJ Bend. Penerimaan</a>
+						<a class="collapse-item" href="?op=elpj_out">LPJ Bend. Pengeluaran</a>
+						<a class="collapse-item" href="?op=elpj_blu">LPJ Bend. BLU</a>
+        </div>
+      </li>
+
+			<li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBank" aria-expanded="true" aria-controls="collapseBank">
+          <i class="fas fa-fw fa-list-alt"></i>
+          <span>Rekening Satker</span>
+        </a>
+        <div id="collapseBank" class="collapse" aria-labelledby="headingBank" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" href="?op=saldo">Saldo Bank</a>
+						<a class="collapse-item" href="?op=upsaldo">Upload Lap. Saldo</a>
+        </div>
+      </li>
+
+
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-address-book"></i>
-          <span>Anggota</span>
+          <span>Monitoring</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="?op=users">R/U/H Users & Pass</a>
-            <a class="collapse-item" href="?op=anggota">R/U/H Anggota</a>
+						<a class="collapse-item" href="?op=tagihan">Persetujuan SPM</a>
+						<a class="collapse-item" href="?op=cekgaji">Gaji Induk</a>
+						<a class="collapse-item" href="?op=cekppnpn">PPNPN Induk</a>
+						<!--<a class="collapse-item" href="?op=cekthr">THR Gaji PNS/TNI/Polri</a>-->
+						<!--<a class="collapse-item" href="?op=cekthrppnpn">THR PPNPN</a>-->
+            <a class="collapse-item" href="?op=koreksi">Koreksi SPM</a>
+						<!-- <a class="collapse-item" href="?op=pnbp">MP PNBP</a> -->
         </div>
       </li>
-      
-      <!-- Nav Item - referensi Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fas fa-fw fa-address-book"></i>
+
+			<li class="nav-item">
+			<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseFive">
+				<i class="fas fa-fw fa-upload"></i>
+				<span>Upload ADK</span>
+			</a>
+			<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
+				<div class="bg-white py-2 collapse-inner rounded">
+					<a class="collapse-item" href="?op=kontrak">Kontrak</a>
+					<a class="collapse-item" href="?op=supplier">Supplier</a>
+			</div>
+		</li>
+
+		<li class="nav-item">
+		<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEdukasi" aria-expanded="true" aria-controls="collapseTwo">
+			<i class="fas fa-fw fa-book"></i>
+			<span>Edukasi</span>
+		</a>
+		<div id="collapseEdukasi" class="collapse" aria-labelledby="headingEdukasi" data-parent="#accordionSidebar">
+			<div class="bg-white py-2 collapse-inner rounded">
+				<a class="collapse-item" href="?op=video">Video Tutorial</a>
+		</div>
+	</li>
+
+			<li class="nav-item">
+			<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseThree">
+				<i class="fas fa-fw fa-suitcase"></i>
+				<span>CRM</span>
+			</a>
+			<div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionSidebar">
+				<div class="bg-white py-2 collapse-inner rounded">
+					<a class="collapse-item" href="?op=kontak">Kontak Satker</a>
+				</div>
+		</li>
+
+            <!-- Nav Item - referensi Collapse Menu -->
+        <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseTwo">
+          <i class="fas fa-fw fa-list"></i>
           <span>Referensi</span>
         </a>
-        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
+        <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="?op=unit">Unit Instansi</a>
-            <a class="collapse-item" href="?op=bank">Bank</a>
+						<a class="collapse-item" href="?op=blangko">Blangko dan Formulir</a>
+            <a class="collapse-item" href="?op=users">Pengguna</a>
+            <a class="collapse-item" href="?op=satker">Satuan Kerja</a>
         </div>
       </li>
 
@@ -116,7 +206,8 @@ else{
         </a>
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="?op=periode">Ganti Password</a>
+            <a class="collapse-item" href="?op=periode">Tahun Anggaran</a>
+						<a class="collapse-item" href="?op=session">Cek Login & Sessions</a>
           </div>
         </div>
       </li>
@@ -125,7 +216,7 @@ else{
       <hr class="sidebar-divider">
 
       <!-- Heading -->
-    
+
       <!-- Sidebar Toggler (Sidebar) -->
       <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
@@ -148,20 +239,15 @@ else{
             <i class="fa fa-bars"></i>
           </button>
 
-          <!-- Topbar Search 
-          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-            <div class="input-group">
-              <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-              <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                  <i class="fas fa-search fa-sm"></i>
-                </button>
-              </div>
-            </div>
-          </form>
-          -->	
-         
-			<p class='mr-2 d-none d-lg-inline text-gray-600 small'>Tanggal: <?php  $tgl=date('d-m-Y'); echo $tgl; ?></p>
+			<p class='mr-2 d-none d-lg-inline text-gray-600 small'><b><a href='?op=periode' class='btn btn-success btn-icon-split '>
+							<span class='icon text-white-50'><i class='fas fa-calendar'></i></span>
+				<span class='text'><?php echo $tahun; ?></span>
+					</a>
+					<a href='#' class='btn btn-warning btn-circle btn-sm'>
+	        	<i class='fas fa-exclamation-triangle masterTooltip' title='Bila data tidak muncul, ubah periode Tahun Anggaran'></i>
+	      	</a>
+
+			</b></p>
 
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
@@ -186,120 +272,12 @@ else{
               </div>
             </li>
 
-            <!-- Nav Item - Alerts 
-            <li class="nav-item dropdown no-arrow mx-1">
-              <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-bell fa-fw"></i>
-                <!-- Counter - Alerts 
-                <span class="badge badge-danger badge-counter">3+</span>
-              </a>
-              <!-- Dropdown - Alerts 
-              <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
-                <h6 class="dropdown-header">
-                  Alerts Center
-                </h6>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                  <div class="mr-3">
-                    <div class="icon-circle bg-primary">
-                      <i class="fas fa-file-alt text-white"></i>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="small text-gray-500">December 12, 2019</div>
-                    <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                  </div>
-                </a>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                  <div class="mr-3">
-                    <div class="icon-circle bg-success">
-                      <i class="fas fa-donate text-white"></i>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="small text-gray-500">December 7, 2019</div>
-                    $290.29 has been deposited into your account!
-                  </div>
-                </a>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                  <div class="mr-3">
-                    <div class="icon-circle bg-warning">
-                      <i class="fas fa-exclamation-triangle text-white"></i>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="small text-gray-500">December 2, 2019</div>
-                    Spending Alert: We've noticed unusually high spending for your account.
-                  </div>
-                </a>
-                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-              </div>
-            </li>
-            -->
-
-            <!-- Nav Item - Messages 
-            <li class="nav-item dropdown no-arrow mx-1">
-              <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-envelope fa-fw"></i>
-                <!-- Counter - Messages 
-                <span class="badge badge-danger badge-counter">7</span>
-              </a>
-              <!-- Dropdown - Messages 
-              <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
-                <h6 class="dropdown-header">
-                  Message Center
-                </h6>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                  <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="https://source.unsplash.com/fn_BT9fwg_E/60x60" alt="">
-                    <div class="status-indicator bg-success"></div>
-                  </div>
-                  <div class="font-weight-bold">
-                    <div class="text-truncate">Hi there! I am wondering if you can help me with a problem I've been having.</div>
-                    <div class="small text-gray-500">Emily Fowler · 58m</div>
-                  </div>
-                </a>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                  <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="https://source.unsplash.com/AU4VPcFN4LE/60x60" alt="">
-                    <div class="status-indicator"></div>
-                  </div>
-                  <div>
-                    <div class="text-truncate">I have the photos that you ordered last month, how would you like them sent to you?</div>
-                    <div class="small text-gray-500">Jae Chun · 1d</div>
-                  </div>
-                </a>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                  <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="https://source.unsplash.com/CS2uCrpNzJY/60x60" alt="">
-                    <div class="status-indicator bg-warning"></div>
-                  </div>
-                  <div>
-                    <div class="text-truncate">Last month's report looks great, I am very happy with the progress so far, keep up the good work!</div>
-                    <div class="small text-gray-500">Morgan Alvarez · 2d</div>
-                  </div>
-                </a>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                  <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" alt="">
-                    <div class="status-indicator bg-success"></div>
-                  </div>
-                  <div>
-                    <div class="text-truncate">Am I a good boy? The reason I ask is because someone told me that people say this to all dogs, even if they aren't good...</div>
-                    <div class="small text-gray-500">Chicken the Dog · 2w</div>
-                  </div>
-                </a>
-                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
-              </div>
-            </li>
-
-            <div class="topbar-divider d-none d-sm-block"></div>
-            -->
-
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php  echo $_SESSION[namalengkap]; ?></span>
-                <img class="img-profile rounded-circle" src="<?php echo "photos/".$_SESSION[namauser].".jpg"; ?>">
+                <!-- <img class="img-profile rounded-circle" src="<?php echo "photos/".$_SESSION[namauser].".jpg"; ?>"> -->
+								<i class="fas fa-fw fa-user"></i>
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -307,7 +285,7 @@ else{
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   Profile
                 </a>
-                
+
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -320,17 +298,18 @@ else{
 
         </nav>
         <!-- End of Topbar -->
-       
+
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
 			  <?php include "content.php"; ?>
           </div>
-        <!-- /.container-fluid --> 
-       
+        <!-- /.container-fluid -->
+
 		</div>
       </div>
 </div>
+
       <!-- End of Main Content -->
 
 
@@ -341,6 +320,7 @@ else{
           </div>
         </div>
       </footer>
+
 
       <!-- End of Footer -->
 
@@ -360,12 +340,12 @@ else{
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Siap untuk logout?</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-body">Tekan tombol "Logout" jika Anda hendak mengakhiri session ini.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
           <a class="btn btn-primary" href="logout.php">Logout</a>
@@ -376,7 +356,7 @@ else{
 
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
-  
+
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
@@ -399,23 +379,29 @@ else{
   <script src="js/demo/chart-pie-demo.js"></script>
   <script src="js/bootstrap-datetimepicker.js"></script>
   <script src="js/jquery.chained.min.js"></script>
-  
-	<!-- Pengaturan Datatables -->  
+
+	<script src="vendor/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+<!-- Pengaturan Datatables -->
   <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		oTable = $('#example').dataTable({
+			"scrollX": true,
+			"sScrollXInner": "100%",
+			"scrollY": true,
 			"aaSorting": [],
 			"sPaginationType": "full_numbers",
-			"autoWidth": false,
+			"autoWidth": true
 			});
 		} );
 	</script>
+
 
 <!-- PENGATURAN KONFIRMASI DELETE -->
 <script>
 		function confirmationDelete(anchor)
 		{
-		   var conf = confirm('Are you sure want to delete this record?');
+		   var conf = confirm('Anda yakin akan menghapus data ini?');
 		   if(conf)
 			  window.location=anchor.attr("href");
 		}
@@ -428,16 +414,16 @@ else{
     });
   });
 </script>
-	
+
 	<!-- Pengaturan Alert Button -->
 	<script type="text/javascript" >
 	$(document).ready(function(){
     $('button').click(function(){
         $('.alert').show()
-    }) 
+    })
 	});
 	</script>
-	
+
 	<!-- pengaturan datetimepicker -->
 	<script>
 		// Default date and time picker
@@ -473,25 +459,28 @@ else{
       })
       //$('#my_dtp2').datetimepicker('update', new Date())
 	</script>
-	
 
 
-<script type="text/javascript" >
-	$(document).ready(function() {
-    /* For jquery.chained.js */
-	    $("#es4").chained("#es3");
-   	 $("#jabatan").chained("#es4"); 	 
-    });
-</script>
 
 <script type="text/javascript" >
 	$(document).ready(function() {
     /* For jquery.chained.js */
-   	 $("#jabatan").chained("#es4"); 	 
+	    $("#klprek").chained("#jnsrek");
     });
 </script>
 
+<!-- Pengaturan nicEdit  -->
+<script src="//js.nicedit.com/nicEdit-latest.js"></script>
+<!-- <script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script> -->
 
+<script type="text/javascript">
+  bkLib.onDomLoaded(function() {
+				nicEditors.allTextAreas({buttonList : ['fontSize','fontFamily','fontFormat',
+				'bold','italic','underline','left','center','right','justify',
+				'strikeThrough','subscript','superscript','ol','ul','indent','outdent',
+				'forecolor','bgcolor']});
+    });
+  </script>
 
 <!-- akhir dari body html -->
 </body>
@@ -500,4 +489,3 @@ else{
 	}
 }
 ?>
-

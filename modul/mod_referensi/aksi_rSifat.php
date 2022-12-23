@@ -18,7 +18,7 @@ $op		=$_GET[op];  $act	=$_GET[act];
 
 if ($op=='rSifat' AND $act=='input'){
 	$date	= date("Y-m-d");
-	mysql_query("INSERT INTO rsifat(
+	mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO rsifat(
 									id,
 									sifat) 
 					                VALUES(
@@ -28,7 +28,7 @@ if ($op=='rSifat' AND $act=='input'){
 	header('location:rSifat.php');
 }
 elseif ($op=='rSifat' AND $act=='update'){
-  mysql_query("UPDATE rsifat SET 
+  mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE rsifat SET 
 								 id	= '$_POST[kodeSifat]',
 								 sifat	= '$_POST[urSifat]'
 								 WHERE id  = '$_POST[kodeSifat]'");
@@ -37,7 +37,7 @@ elseif ($op=='rSifat' AND $act=='update'){
 
 //MENGHAPUS DATA
 elseif ($op=='rSifat' AND $act=='delete'){
-  mysql_query("DELETE from rsifat WHERE id   = '$_POST[kodeSifat]'");
+  mysqli_query($GLOBALS["___mysqli_ston"], "DELETE from rsifat WHERE id   = '$_POST[kodeSifat]'");
   header('location:rSifat.php');
 }
 

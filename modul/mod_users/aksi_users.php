@@ -18,83 +18,42 @@ $op		=$_GET[op];  $act	=$_GET[act];
 
 if ($op=='users' AND $act=='input'){
 	$pass = md5($_POST[password]);
-	mysql_query("INSERT INTO kpn_users(
+	mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO kpn_users(
 									username,
 									password,
 									nama_lengkap,
 									email,
-									no_telp,
+                  no_telp,
+                  kd_satker,
+                  kd_kppn,
 									level,
-									blokir)
+									blokir
+                  )
 									VALUES(
-									'$_POST[username]',								
+									'$_POST[username]',
 									'$pass',
 									'$_POST[nama_lengkap]',
 									'$_POST[email]',
 									'$_POST[no_telp]',
+                  '$_POST[kd_satker]',
+                  '$_POST[kd_kppn]',
 									'$_POST[level]',
 									'$_POST[blokir]'
 									)");
-
-//menginput ke dalam tabel anggota
-$qinsa=mysql_query("SELECT * FROM kpn_users WHERE username = '$_POST[username]' ");
-$insa = mysql_fetch_array($qinsa);
-
-mysql_query("INSERT INTO kpn_anggota(
-	id,
-	nip,
-	nama_lengkap,
-	tempat_lhr,
-	tgl_lhr,
-	alamat,
-	email,
-	no_telp,
-	unit,
-	bank,
-	norek,
-	tgl_daftar,
-	aktif)
-	VALUES(
-	'$insa[id]',
-	'$insa[username]',								
-	'$insa[nama_lengkap]',
-	'',
-	'',
-	'',
-	'$insa[email]',
-	'$insa[no_telp]',
-	'',
-	'',
-	'',
-	'',
-	'Y'
-	)"
-	);
 
 	header('location:../../show.php?op='.$op);
 }
 elseif ($op=='users' AND $act=='update'){
 
-//updating table kpn_users
-	$pass = md5($_POST[password]);
-mysql_query("UPDATE kpn_users SET 
-								 username		= '$_POST[username]',
-								 password		= '$pass',
-								 nama_lengkap	= '$_POST[nama_lengkap]',
+mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE kpn_users SET
+                username    = '$_POST[username]',  
+                 nama_lengkap	= '$_POST[nama_lengkap]',
 								 email			= '$_POST[email]',
 								 no_telp		= '$_POST[no_telp]',
+                 kd_satker		= '$_POST[kd_satker]',
+                 kd_kppn		= '$_POST[kd_kppn]',
 								 level			= '$_POST[level]',
 								 blokir			= '$_POST[blokir]'
-								 WHERE id		= '$_POST[id]'");
-
-//updating table kpn_anggota
-mysql_query("UPDATE kpn_anggota SET 
-								 
-								 id				= '$_POST[id]',
-								 nip			= '$_POST[username]',
-								 nama_lengkap	= '$_POST[nama_lengkap]',
-								 email			= '$_POST[email]',
-								 no_telp		= '$_POST[no_telp]'
 								 WHERE id		= '$_POST[id]'");
 
   header('location:../../show.php?op='.$op);
@@ -102,10 +61,18 @@ mysql_query("UPDATE kpn_anggota SET
 
 // MENGHAPUS DATA
 elseif ($op=='users' AND $act=='delete'){
-  mysql_query("DELETE FROM kpn_users WHERE id='$_GET[id]' ");
+  mysqli_query($GLOBALS["___mysqli_ston"], "DELETE FROM kpn_users WHERE id='$_GET[id]' ");
 	header('location:../../show.php?op='.$op);
 }
-//
+
+//reset Password
+elseif ($op=='users' AND $act=='reset'){
+  $pass = md5(trim($_POST[password]));
+  mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE kpn_users SET
+  								 password			= '$pass'
+  								 WHERE id		= '$_POST[id]'");
+	header('location:../../show.php?op='.$op);
+}
 
 //akhir dari line
 }

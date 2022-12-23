@@ -50,8 +50,8 @@ switch($_GET[act]){
 						FROM  register 
 							INNER JOIN  pegawai ON ( register.peg = pegawai.id_pegawai)";
 	
-    $tampil	= mysql_query("$sqlQ WHERE  periode='$_SESSION[periode]' ORDER BY nama ASC");
-    while ($r=mysql_fetch_array($tampil)){
+    $tampil	= mysqli_query($GLOBALS["___mysqli_ston"], "$sqlQ WHERE  periode='$_SESSION[periode]' ORDER BY nama ASC");
+    while ($r=mysqli_fetch_array($tampil)){
        echo "<tr>
 			 <td  align=center>$no</td>
              <td>$r[1]<br>$r[2]</td>
@@ -89,8 +89,8 @@ switch($_GET[act]){
 		  <label><span>NAMA PEGAWAI</span>";
 		    echo  "<select name='peg'>
             <option value=0 selected>- NAMA PEGAWAI -</option>";
-            $tampil=mysql_query("SELECT * FROM pegawai ORDER BY nama ASC");
-            while($t=mysql_fetch_array($tampil)){
+            $tampil=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM pegawai ORDER BY nama ASC");
+            while($t=mysqli_fetch_array($tampil)){
             echo "<option value=$t[id_pegawai]>$t[nama]</option>";
             }
 		  echo "</select></label>
@@ -106,8 +106,8 @@ switch($_GET[act]){
      break;
   
   case "editregister":
-    $edit=mysql_query("SELECT * FROM register WHERE id_register='$_GET[id]'");
-    $r=mysql_fetch_array($edit);
+    $edit=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM register WHERE id_register='$_GET[id]'");
+    $r=mysqli_fetch_array($edit);
 
     echo "<h1>Edit register</h1>
 			<div class='line'></div>
@@ -117,12 +117,12 @@ switch($_GET[act]){
           <label><span>NOMOR SURAT</span><input type=text name='nos' size=40 value='$r[nos]'></label>
 		  <label><span>TANGGAL SURAT</span><input type=text name='tgl1' size=15 id=datepicker value='$r[tgl1]'></label>
 		  <label><span>NAMA PEGAWAI</span>";
-			$peg 	= mysql_query("SELECT * FROM pegawai WHERE id_pegawai='$r[peg]'");
-			$rt    	= mysql_fetch_array($peg);
+			$peg 	= mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM pegawai WHERE id_pegawai='$r[peg]'");
+			$rt    	= mysqli_fetch_array($peg);
 		    echo  "<select name='peg'>
             <option value='$r[peg]' selected>- $rt[nama] -</option>";
-            $tampil=mysql_query("SELECT * FROM pegawai ORDER BY nama ASC");
-            while($t=mysql_fetch_array($tampil)){
+            $tampil=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM pegawai ORDER BY nama ASC");
+            while($t=mysqli_fetch_array($tampil)){
             echo "<option value=$t[id_pegawai]>$t[nama]</option>";
             }
 			echo "</select></label>

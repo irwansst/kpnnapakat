@@ -48,8 +48,8 @@ switch($_GET[act]){
 						FROM  hukuman 
 							INNER JOIN  pegawai ON ( hukuman.peg = pegawai.id_pegawai)";
 	
-    $tampil	= mysql_query("$sqlQ WHERE  periode='$_SESSION[periode]' ORDER BY nama ASC");
-    while ($r=mysql_fetch_array($tampil)){
+    $tampil	= mysqli_query($GLOBALS["___mysqli_ston"], "$sqlQ WHERE  periode='$_SESSION[periode]' ORDER BY nama ASC");
+    while ($r=mysqli_fetch_array($tampil)){
        echo "<tr>
 			 <td  align=center>$no</td>
              <td>$r[10]</td>
@@ -84,8 +84,8 @@ switch($_GET[act]){
 		  <label><span>NAMA PEGAWAI</span>";
 		    echo  "<select name='peg'>
             <option value=0 selected>- NAMA PEGAWAI -</option>";
-            $tampil=mysql_query("SELECT * FROM pegawai ORDER BY nama ASC");
-            while($t=mysql_fetch_array($tampil)){
+            $tampil=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM pegawai ORDER BY nama ASC");
+            while($t=mysqli_fetch_array($tampil)){
             echo "<option value=$t[id_pegawai]>$t[nama]</option>";
             }
 		  echo "</select></label>
@@ -101,8 +101,8 @@ switch($_GET[act]){
      break;
   
   case "edithukuman":
-    $edit=mysql_query("SELECT * FROM hukuman WHERE id_hukuman='$_GET[id]'");
-    $r=mysql_fetch_array($edit);
+    $edit=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM hukuman WHERE id_hukuman='$_GET[id]'");
+    $r=mysqli_fetch_array($edit);
 
     echo "<h1>Edit hukuman</h1>
 			<div class='line'></div>
@@ -110,12 +110,12 @@ switch($_GET[act]){
           echo "<form method=POST action=$aksi?op=hukuman&act=update>
           <input type=hidden name=id value='$r[id_hukuman]'>
 		  <label><span>NAMA PEGAWAI</span>";
-			$peg 	= mysql_query("SELECT * FROM pegawai WHERE id_pegawai='$r[peg]'");
-			$rt    	= mysql_fetch_array($peg);
+			$peg 	= mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM pegawai WHERE id_pegawai='$r[peg]'");
+			$rt    	= mysqli_fetch_array($peg);
 		    echo  "<select name='peg'>
             <option value='$r[peg]' selected>- $rt[nama] -</option>";
-            $tampil=mysql_query("SELECT * FROM pegawai ORDER BY nama ASC");
-            while($t=mysql_fetch_array($tampil)){
+            $tampil=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM pegawai ORDER BY nama ASC");
+            while($t=mysqli_fetch_array($tampil)){
             echo "<option value=$t[id_pegawai]>$t[nama]</option>";
             }
 			echo "</select></label>

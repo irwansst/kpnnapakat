@@ -52,8 +52,8 @@ switch($_GET[act]){
 						FROM  skeputusan 
 							INNER JOIN  pegawai ON ( skeputusan.pelaksana = pegawai.id_pegawai)";
 	
-    $tampil	= mysql_query("$sqlQ WHERE  periode='$_SESSION[periode]' ORDER BY tsurat DESC");
-    while ($r=mysql_fetch_array($tampil)){
+    $tampil	= mysqli_query($GLOBALS["___mysqli_ston"], "$sqlQ WHERE  periode='$_SESSION[periode]' ORDER BY tsurat DESC");
+    while ($r=mysqli_fetch_array($tampil)){
 	
 	$nomor = $x.$r[nsurat].'/'.$r[kdwil].'/'.$r[kdmas].$r[blth];
 	
@@ -80,8 +80,8 @@ switch($_GET[act]){
       echo "<h1>Tambah surat perintah</h1>
 			<div class='line'></div>
 			<div class='box'>";
-    $count 	= mysql_query("SELECT count(*) as jml FROM skeputusan WHERE periode='$_SESSION[periode]'");
-	$rj		= mysql_fetch_array($count);
+    $count 	= mysqli_query($GLOBALS["___mysqli_ston"], "SELECT count(*) as jml FROM skeputusan WHERE periode='$_SESSION[periode]'");
+	$rj		= mysqli_fetch_array($count);
 	$tn		= ($rj[jml]+1);
 	$newNO  = sprintf("%04s", $tn);
     echo "	
@@ -94,8 +94,8 @@ switch($_GET[act]){
 			<label><span>PETUGAS PELAKSANA</span>";
 		    echo  "<select name='pelaksana'>
             <option value=0 selected>- PILIH PETUGAS PELAKSANA -</option>";
-            $tampil=mysql_query("SELECT * FROM pegawai ORDER BY nama ASC");
-            while($t=mysql_fetch_array($tampil)){
+            $tampil=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM pegawai ORDER BY nama ASC");
+            while($t=mysqli_fetch_array($tampil)){
             echo "<option value=$t[id_pegawai]>$t[nama]</option>";
             }
 		  echo "</select></label>
@@ -110,8 +110,8 @@ switch($_GET[act]){
   
 
   case "editsKeputusan":
-    $edit = mysql_query("SELECT * FROM skeputusan WHERE id_skeputusan='$_GET[id]'");
-    $r    = mysql_fetch_array($edit);
+    $edit = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM skeputusan WHERE id_skeputusan='$_GET[id]'");
+    $r    = mysqli_fetch_array($edit);
 	
 	$nomor = $x.$r[nsurat].'/'.$r[kdwil].'/'.$r[kdmas].$r[blth];
 	
@@ -128,12 +128,12 @@ switch($_GET[act]){
 		<label><span>KODE WILAYAH</span><input type='text' name='kdwil' value='$r[kdwil]' size='10' style='text-align:center;'></label>
 		<label><span>KODE MASALAH</span><input type='text' name='kdmas' value='$r[kdmas]' size='10' style='text-align:center;'></label>
 		<label><span>PETUGAS PELAKSANA</span>";
-		$peg = mysql_query("SELECT * FROM pegawai WHERE id_pegawai='$r[pelaksana]'");
-		$rt    = mysql_fetch_array($peg);
+		$peg = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM pegawai WHERE id_pegawai='$r[pelaksana]'");
+		$rt    = mysqli_fetch_array($peg);
 		    echo  "<select name='pelaksana'>
             <option value='$r[pelaksana]' selected>- $rt[nama] -</option>";
-            $tampil=mysql_query("SELECT * FROM pegawai ORDER BY nama ASC");
-            while($t=mysql_fetch_array($tampil)){
+            $tampil=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM pegawai ORDER BY nama ASC");
+            while($t=mysqli_fetch_array($tampil)){
             echo "<option value=$t[id_pegawai]>$t[nama]</option>";
             }
 			echo "</select></label>
@@ -166,8 +166,8 @@ switch($_GET[act]){
 						FROM  skeputusan 
 							INNER JOIN  pegawai ON ( skeputusan.pelaksana = pegawai.id_pegawai)";
 	
-	$edit = mysql_query("$sqlQ WHERE id_skeputusan='$_GET[id]'");
-    $r    = mysql_fetch_array($edit);
+	$edit = mysqli_query($GLOBALS["___mysqli_ston"], "$sqlQ WHERE id_skeputusan='$_GET[id]'");
+    $r    = mysqli_fetch_array($edit);
 	
 	$tgl	= tgl_indo($r[tsurat]);
 	$nomor = $x.$r[nsurat].'/'.$r[kdwil].'/'.$r[kdmas].$r[blth];

@@ -42,8 +42,8 @@ if ($_SESSION['leveluser']=='admin'){
 					
 					<tbody>";
 					$no=1;
-					$tampil	= mysql_query("SELECT a.id, a.nip, a.nama_lengkap, a.tempat_lhr, a.tgl_lhr, a.alamat, a.email, a.no_telp, b.nama_unit, a.bank, a.norek, a.tgl_daftar, a.aktif FROM kpn_anggota a LEFT JOIN kpn_unit b ON a.unit = b.kode WHERE LENGTH(a.nip) = 18 ORDER BY a.unit, a.nama_lengkap ASC ");
-      while ($r=mysql_fetch_array($tampil)){
+					$tampil	= mysqli_query($GLOBALS["___mysqli_ston"], "SELECT a.id, a.nip, a.nama_lengkap, a.tempat_lhr, a.tgl_lhr, a.alamat, a.email, a.no_telp, b.nama_unit, a.bank, a.norek, a.tgl_daftar, a.aktif FROM kpn_anggota a LEFT JOIN kpn_unit b ON a.unit = b.kode WHERE LENGTH(a.nip) = 18 ORDER BY a.unit, a.nama_lengkap ASC ");
+      while ($r=mysqli_fetch_array($tampil)){
 	
 		$number = $r[no_telp];
 			if(ctype_digit($number) && strlen($number) !== 5) {
@@ -93,11 +93,11 @@ break;
 case "detailanggota":
 
 	
-	$q_anggota	= mysql_query("SELECT a.id, a.nip, a.nama_lengkap, a.tempat_lhr, a.tgl_lhr, a.alamat, a.email, a.no_telp, a.unit, b.nama_unit, a.bank, a.norek, a.tgl_daftar, a.aktif FROM kpn_anggota a LEFT JOIN kpn_unit b ON a.unit = b.kode WHERE LENGTH(a.nip) = 18 AND a.id='$_GET[id]' ");
-    $qa    = mysql_fetch_array($q_anggota);
+	$q_anggota	= mysqli_query($GLOBALS["___mysqli_ston"], "SELECT a.id, a.nip, a.nama_lengkap, a.tempat_lhr, a.tgl_lhr, a.alamat, a.email, a.no_telp, a.unit, b.nama_unit, a.bank, a.norek, a.tgl_daftar, a.aktif FROM kpn_anggota a LEFT JOIN kpn_unit b ON a.unit = b.kode WHERE LENGTH(a.nip) = 18 AND a.id='$_GET[id]' ");
+    $qa    = mysqli_fetch_array($q_anggota);
 
-	$namabank = mysql_query("SELECT nama_bank from kpn_bank WHERE kode = '$qa[bank]' ");
-	$nb    = mysql_fetch_array($namabank);
+	$namabank = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT nama_bank from kpn_bank WHERE kode = '$qa[bank]' ");
+	$nb    = mysqli_fetch_array($namabank);
     
 
 	echo "		
@@ -239,8 +239,8 @@ echo "
 		<label for='unit'>Unit Kerja:</label>
 		  <select class='form-control' name ='unit' style='width:850px;'>
 		  ";
-			$qunit=mysql_query("SELECT * FROM kpn_unit ORDER BY kode ASC");
-		  	while ($qu=mysql_fetch_array($qunit)){
+			$qunit=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM kpn_unit ORDER BY kode ASC");
+		  	while ($qu=mysqli_fetch_array($qunit)){
 		  	echo "<option value='$qu[kode]'>$qu[kode] | $qu[nama_unit]</option>";	
 			}
 			echo "
@@ -251,8 +251,8 @@ echo "
 		<label for='bank'>Bank:</label>
 		  <select class='form-control' name ='bank' style='width:850px;'>
 		  ";
-			$qbank=mysql_query("SELECT * FROM kpn_bank ORDER BY kode ASC");
-		  	while ($qb=mysql_fetch_array($qbank)){
+			$qbank=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM kpn_bank ORDER BY kode ASC");
+		  	while ($qb=mysqli_fetch_array($qbank)){
 		  	echo "<option value='$qb[kode]'>$qb[kode] | $qb[nama_bank]</option>";	
 			}
 			echo "
@@ -292,14 +292,14 @@ break;
 //mengubah data anggota
 case "editanggota":
 	
-	$q_anggota	= mysql_query("SELECT a.id, a.nip, a.nama_lengkap, a.tempat_lhr, a.tgl_lhr, a.alamat, a.email, a.no_telp, a.unit, b.nama_unit, a.bank, a.norek, a.tgl_daftar, a.aktif FROM kpn_anggota a LEFT JOIN kpn_unit b ON a.unit = b.kode WHERE LENGTH(a.nip) = 18 AND a.id='$_GET[id]' ");
-    $qa    = mysql_fetch_array($q_anggota);
+	$q_anggota	= mysqli_query($GLOBALS["___mysqli_ston"], "SELECT a.id, a.nip, a.nama_lengkap, a.tempat_lhr, a.tgl_lhr, a.alamat, a.email, a.no_telp, a.unit, b.nama_unit, a.bank, a.norek, a.tgl_daftar, a.aktif FROM kpn_anggota a LEFT JOIN kpn_unit b ON a.unit = b.kode WHERE LENGTH(a.nip) = 18 AND a.id='$_GET[id]' ");
+    $qa    = mysqli_fetch_array($q_anggota);
 
-	$namabank = mysql_query("SELECT nama_bank from kpn_bank WHERE kode = '$qa[bank]' ");
-	$nb    = mysql_fetch_array($namabank);
+	$namabank = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT nama_bank from kpn_bank WHERE kode = '$qa[bank]' ");
+	$nb    = mysqli_fetch_array($namabank);
 
-	$namaunit = mysql_query("SELECT nama_unit from kpn_unit WHERE kode = '$qa[unit]' ");
-	$nu    = mysql_fetch_array($namaunit);
+	$namaunit = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT nama_unit from kpn_unit WHERE kode = '$qa[unit]' ");
+	$nu    = mysqli_fetch_array($namaunit);
     
 
 	echo "		
@@ -357,8 +357,8 @@ case "editanggota":
 			  	<select class='form-control' name ='unit' style='width:850px;'>
 			  <option value='$qa[unit]' selected>$qa[unit] | $qa[nama_unit]</OPTION>
 			  ";
-				$qunit=mysql_query("SELECT * FROM kpn_unit ORDER BY kode ASC");
-				  while ($qu=mysql_fetch_array($qunit)){
+				$qunit=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM kpn_unit ORDER BY kode ASC");
+				  while ($qu=mysqli_fetch_array($qunit)){
 				  echo "<option value='$qu[kode]'>$qu[kode] | $qu[nama_unit]</option>";	
 				}
 				echo "
@@ -372,8 +372,8 @@ case "editanggota":
 			  	<select class='form-control' name ='bank' style='width:850px;'>
 			  <option value='$qa[bank]' selected>$qa[bank] | $nb[nama_bank]</OPTION>
 			  ";
-				$qbank=mysql_query("SELECT * FROM kpn_bank ORDER BY kode ASC");
-				  while ($qb=mysql_fetch_array($qbank)){
+				$qbank=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM kpn_bank ORDER BY kode ASC");
+				  while ($qb=mysqli_fetch_array($qbank)){
 				  echo "<option value='$qb[kode]'>$qb[kode] | $qb[nama_bank]</option>";	
 				}
 				echo "

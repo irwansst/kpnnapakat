@@ -39,8 +39,8 @@ switch($_GET[act]){
 		</thead>
 		<tbody>";
 		
-    $tampil	= mysql_query("SELECT * FROM jenis ORDER BY kodejenis desc ");
-    while ($r=mysql_fetch_array($tampil)){
+    $tampil	= mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM jenis ORDER BY kodejenis desc ");
+    while ($r=mysqli_fetch_array($tampil)){
 	
        echo "<tr>
 			 <td align=center >$r[id]</td>
@@ -74,8 +74,8 @@ switch($_GET[act]){
   
 
   case "editrJenis":
-    $edit = mysql_query("SELECT * FROM Jenis WHERE id='$_GET[id]'");
-    $r    = mysql_fetch_array($edit);
+    $edit = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM Jenis WHERE id='$_GET[id]'");
+    $r    = mysqli_fetch_array($edit);
 	
 	
 	echo "<h1>Ubah rJenis</h1>
@@ -93,7 +93,7 @@ switch($_GET[act]){
     break;
 	
 	case "deleterJenis":
-	mysql_query("DELETE FROM jenis WHERE id='$_GET[id]' ");
+	mysqli_query($GLOBALS["___mysqli_ston"], "DELETE FROM jenis WHERE id='$_GET[id]' ");
 	header('location:rJenis.php');
     break; 
 

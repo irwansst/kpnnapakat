@@ -13,8 +13,8 @@ switch($_GET[act]){
   // Tampil User
   default:
     
-    $edit=mysql_query("SELECT * FROM nama WHERE id_nama='1'");
-    $r=mysql_fetch_array($edit);
+    $edit=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM nama WHERE id_nama='1'");
+    $r=mysqli_fetch_array($edit);
 
 	echo "<h1>Ubah Profil Instansi</h1>
 			<div class='line'></div>

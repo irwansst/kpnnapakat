@@ -17,7 +17,7 @@ include "../../config/fungsi_indotgl.php";
 $op		=$_GET[op];  $act	=$_GET[act];
 
 if ($op=='unit' AND $act=='input'){
-	mysql_query("INSERT INTO kpn_unit(
+	mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO kpn_unit(
 									kode,
 									nama_unit)
 									VALUES(
@@ -27,7 +27,7 @@ if ($op=='unit' AND $act=='input'){
 	header('location:../../show.php?op='.$op);
 }
 elseif ($op=='unit' AND $act=='update'){
-mysql_query("UPDATE kpn_unit SET 
+mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE kpn_unit SET 
 								 kode			= '$_POST[kode]',
 								 nama_unit	= '$_POST[nama_unit]'
 								 WHERE id		= '$_POST[id]'");
@@ -36,7 +36,7 @@ mysql_query("UPDATE kpn_unit SET
 
 // MENGHAPUS DATA
 elseif ($op=='unit' AND $act=='delete'){
-  mysql_query("DELETE FROM kpn_unit WHERE id='$_GET[id]' ");
+  mysqli_query($GLOBALS["___mysqli_ston"], "DELETE FROM kpn_unit WHERE id='$_GET[id]' ");
 	header('location:../../show.php?op='.$op);
 }
 //

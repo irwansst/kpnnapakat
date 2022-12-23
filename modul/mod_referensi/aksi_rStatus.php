@@ -18,7 +18,7 @@ $op		=$_GET[op];  $act	=$_GET[act];
 
 if ($op=='rStatus' AND $act=='input'){
 	$date	= date("Y-m-d");
-	mysql_query("INSERT INTO rstatus(
+	mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO rstatus(
 									id,
 									status) 
 					                VALUES(
@@ -28,7 +28,7 @@ if ($op=='rStatus' AND $act=='input'){
 	header('location:rStatus.php');
 }
 elseif ($op=='rStatus' AND $act=='update'){
-  mysql_query("UPDATE rstatus SET 
+  mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE rstatus SET 
 								 id	= '$_POST[kodeStatus]',
 								 Status	= '$_POST[urStatus]'
 								 WHERE id  = '$_POST[kodeStatus]'");
@@ -37,7 +37,7 @@ elseif ($op=='rStatus' AND $act=='update'){
 
 //MENGHAPUS DATA
 elseif ($op=='rStatus' AND $act=='delete'){
-  mysql_query("DELETE from rStatus WHERE id   = '$_POST[kodeStatus]'");
+  mysqli_query($GLOBALS["___mysqli_ston"], "DELETE from rStatus WHERE id   = '$_POST[kodeStatus]'");
   header('location:rStatus.php');
 }
 

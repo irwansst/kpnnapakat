@@ -11,7 +11,7 @@ $op=$_GET[op];
 $act=$_GET[act];
 
 if ($op=='nama' AND $act=='update'){
-    mysql_query("UPDATE nama SET nama	= '$_POST[nama]',
+    mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE nama SET nama	= '$_POST[nama]',
                                  alamat = '$_POST[alamat]',
                                  telp   = '$_POST[telp]',  
                                  email  = '$_POST[email]',  

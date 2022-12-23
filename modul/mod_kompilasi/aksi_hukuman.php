@@ -13,11 +13,11 @@ $op=$_GET[op];
 $act=$_GET[act];
 
 if ($op=='hukuman' AND $act=='hapus'){
-  mysql_query("DELETE FROM hukuman WHERE id_hukuman='$_GET[id]'");
+  mysqli_query($GLOBALS["___mysqli_ston"], "DELETE FROM hukuman WHERE id_hukuman='$_GET[id]'");
   header('location:hukuman.php');
 }
 elseif ($op=='hukuman' AND $act=='input'){
-  mysql_query("INSERT INTO hukuman(
+  mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO hukuman(
 			   peg,
 			   pasal,
 			   pengaduan,
@@ -39,7 +39,7 @@ elseif ($op=='hukuman' AND $act=='input'){
   header('location:hukuman.php');
 }
 elseif ($op=='hukuman' AND $act=='update'){
-  mysql_query("UPDATE hukuman SET 
+  mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE hukuman SET 
 				peg 	= '$_POST[peg]', 
 				pasal 	= '$_POST[pasal]', 
 				pengaduan 	= '$_POST[pengaduan]', 

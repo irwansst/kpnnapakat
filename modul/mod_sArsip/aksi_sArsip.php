@@ -33,8 +33,8 @@ if ($op=='sArsip' AND $act=='input'){
 			echo "<script>alert('Upload Data Sukses!!!');</script>";
 						
 			//membuat nomor urut arsip
-			$q = mysql_query("select MAX(nUrut) as nourut from sarsip where periode='$_SESSION[periode]' AND bidang='$_POST[bidang]' ");
-			$r = mysql_fetch_array($q);
+			$q = mysqli_query($GLOBALS["___mysqli_ston"], "select MAX(nUrut) as nourut from sarsip where periode='$_SESSION[periode]' AND bidang='$_POST[bidang]' ");
+			$r = mysqli_fetch_array($q);
 			if($r){
 					$nurut=$r[nourut]+1;
 			}else{
@@ -44,7 +44,7 @@ if ($op=='sArsip' AND $act=='input'){
 			//membuat nomor arsip
 			$noarc = $_SESSION[periode].$_POST[bidang].sprintf("%05d", $nurut);
 			//memasukkan data ke tabel
-			mysql_query("INSERT INTO sarsip(
+			mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO sarsip(
 									tArsip,
 									jKlasifikasi,
 									jArsip,
@@ -90,7 +90,7 @@ if ($op=='sArsip' AND $act=='input'){
 	}	
 	
 elseif ($op=='sArsip' AND $act=='update'){
-  mysql_query("UPDATE sArsip SET 
+  mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE sArsip SET 
 								 nAgenda	= '$_POST[nagenda]',
 								 jSurat		= '$_POST[jsurat]',
 								 usifat		= '$_POST[usifat]',

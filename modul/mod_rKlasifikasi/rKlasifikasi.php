@@ -37,8 +37,8 @@ switch($_GET[act]){
 		</thead>
 		<tbody>";
 		
-    $tampil	= mysql_query("SELECT * FROM rklasifikasi ORDER BY kode asc ");
-    while ($r=mysql_fetch_array($tampil)){
+    $tampil	= mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rklasifikasi ORDER BY kode asc ");
+    while ($r=mysqli_fetch_array($tampil)){
 	
        echo "<tr>
 			 <td align=left>$r[kode]</td>
@@ -76,8 +76,8 @@ switch($_GET[act]){
   
 
   case "editrKlasifikasi":
-    $edit = mysql_query("SELECT * FROM Klasifikasi WHERE id='$_GET[kode]'");
-    $r    = mysql_fetch_array($edit);
+    $edit = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM Klasifikasi WHERE id='$_GET[kode]'");
+    $r    = mysqli_fetch_array($edit);
 	
 	
 	echo "<h1>Ubah rKlasifikasi</h1>
@@ -95,7 +95,7 @@ switch($_GET[act]){
     break;
 	
 	case "deleterKlasifikasi":
-	mysql_query("DELETE FROM Klasifikasi WHERE id='$_GET[kode]' ");
+	mysqli_query($GLOBALS["___mysqli_ston"], "DELETE FROM Klasifikasi WHERE id='$_GET[kode]' ");
 	header('location:rKlasifikasi.php');
     break; 
 

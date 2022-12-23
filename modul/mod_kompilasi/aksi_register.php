@@ -13,11 +13,11 @@ $op=$_GET[op];
 $act=$_GET[act];
 
 if ($op=='register' AND $act=='hapus'){
-  mysql_query("DELETE FROM register WHERE id_register='$_GET[id]'");
+  mysqli_query($GLOBALS["___mysqli_ston"], "DELETE FROM register WHERE id_register='$_GET[id]'");
   header('location:register.php');
 }
 elseif ($op=='register' AND $act=='input'){
-  mysql_query("INSERT INTO register(
+  mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO register(
 			   nos, 
 			   tgl1, 
 			   peg, 
@@ -43,7 +43,7 @@ elseif ($op=='register' AND $act=='input'){
   header('location:register.php');
 }
 elseif ($op=='register' AND $act=='update'){
-  mysql_query("UPDATE register SET 
+  mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE register SET 
 				nos 	= '$_POST[nos]', 
 				tgl1 	= '$_POST[tgl1]', 
 				peg 	= '$_POST[peg]', 

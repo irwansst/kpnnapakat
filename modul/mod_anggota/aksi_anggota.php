@@ -18,7 +18,7 @@ $op		=$_GET[op];  $act	=$_GET[act];
 
 if ($op=='anggota' AND $act=='input'){
 	$pass = md5($_POST[password]);
-	mysql_query("INSERT INTO kpn_anggota(
+	mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO kpn_anggota(
 									username,
 									password,
 									nama_lengkap,
@@ -41,7 +41,7 @@ if ($op=='anggota' AND $act=='input'){
 elseif ($op=='anggota' AND $act=='update'){
 
 //updating table kpn_users
-mysql_query("UPDATE kpn_anggota SET 
+mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE kpn_anggota SET 
 								 tempat_lhr		= '$_POST[tempat_lhr]',
 								 tgl_lhr		= '$_POST[tgl_lhr]',
 								 alamat			= '$_POST[alamat]',
@@ -57,7 +57,7 @@ mysql_query("UPDATE kpn_anggota SET
 
 // MENGHAPUS DATA
 elseif ($op=='anggota' AND $act=='delete'){
-  mysql_query("DELETE FROM kpn_anggota WHERE id='$_GET[id]' ");
+  mysqli_query($GLOBALS["___mysqli_ston"], "DELETE FROM kpn_anggota WHERE id='$_GET[id]' ");
 	header('location:../../show.php?op='.$op);
 }
 //
